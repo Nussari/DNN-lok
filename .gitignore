@@ -1,0 +1,10 @@
+# data: download with  python claude_run/tools/get_data.py
+data/
+# rebuilt automatically from data/
+claude_run/cache/
+# model weights (large); results/ holds every metric and val probability
+claude_run/checkpoints/
+claude_run/tools/_out/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
