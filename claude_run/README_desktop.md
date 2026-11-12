@@ -41,6 +41,7 @@ This sends the executed notebooks, `results/` and `artifacts/`. The final model'
 re-rendering from the cache.
 
 ## Notes
-* Runs stay in fp32 (no AMP), so they are comparable with the runs already made on the Mac. Each notebook
-  compares options that were all trained on the same device, because c7 and later retrain their own baseline.
+* Runs stay in fp32 (no AMP), so they are comparable with the runs already made on the Mac. c6 was half done
+  on the Mac: it now starts with a device check (the c4 baseline retrained on CUDA, compared with the MPS runs).
+  c7 and later retrain their own baseline, so their comparisons are within one device.
 * The test set is never evaluated. `c10_threshold.ipynb` has `RUN_TEST = False`.
