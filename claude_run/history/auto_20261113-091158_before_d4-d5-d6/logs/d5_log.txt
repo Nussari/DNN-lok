@@ -1,0 +1,252 @@
+--[1] 12 frontier models from d4:
+
+--[1]                          label                            run   bytes  \
+0      dwsep_k5_w4 pruned 95 %    d4/dwsep_k5_w4_dist_prune95     959   
+1      dwsep_k5_w4 pruned 90 %    d4/dwsep_k5_w4_dist_prune90    1303   
+2      dwsep_k5_w4 pruned 75 %    d4/dwsep_k5_w4_dist_prune75    2331   
+3    dwsep_k5_w2 (labels only)                 d2/dwsep_k5_w2    2952   
+4      dwsep_k5_w4 pruned 50 %    d4/dwsep_k5_w4_dist_prune50    4047   
+5      dwsep_k5_w4 (distilled)        d3/dwsep_k5_w4_kdT4a0.5    7264   
+6    dwsep_k3_w8 (labels only)                 d2/dwsep_k3_w8   15408   
+7    dwsep_k5_w8 (labels only)                 d2/dwsep_k5_w8   20016   
+8   dwsep_k3_w16 (labels only)                d2/dwsep_k3_w16   52816   
+9     dwsep_k5_w32 pruned 75 %   d4/dwsep_k5_w32_labe_prune75   61876   
+10    dwsep_k5_w32 pruned 50 %   d4/dwsep_k5_w32_labe_prune50  114132   
+11   single_k5_w16 pruned 50 %  d4/single_k5_w16_dist_prune50  587778   
+
+    bal_acc  sparsity  
+0    0.2500    0.9499  
+1    0.3477    0.8998  
+2    0.5651    0.7500  
+3    0.7946    0.0000  
+4    0.8580    0.5000  
+5    0.8685    0.0000  
+6    0.8906    0.0000  
+7    0.9158    0.0000  
+8    0.9484    0.0000  
+9    0.9598    0.7500  
+10   0.9696    0.5000  
+11   0.9735    0.5000  
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] C:\Users\vikto\Documents\DNN-lok\.venv\Lib\site-packages\torch\ao\quantization\observer.py:229: UserWarning: Please use quant_min and quant_max to specify the range for observers.                     reduce_range will be deprecated in a future release of PyTorch.
+  warnings.warn(
+
+--[3] quant                        fp32 kB    fp32  PTQ 8-bit  QAT 8-bit  real int8  \
+model                                                                           
+dwsep_k5_w4 pruned 95 %       0.9365  0.2500     0.2500     0.2500     0.2500   
+dwsep_k5_w4 pruned 90 %       1.2725  0.3477     0.3489     0.3574     0.3269   
+dwsep_k5_w4 pruned 75 %       2.2764  0.5651     0.5652     0.5838     0.5310   
+dwsep_k5_w2 (labels only)     2.8828  0.7946     0.7917     0.8034     0.7707   
+dwsep_k5_w4 pruned 50 %       3.9521  0.8580     0.8570     0.8607     0.8534   
+dwsep_k5_w4 (distilled)       7.0938  0.8685     0.8674     0.8839     0.8643   
+dwsep_k3_w8 (labels only)    15.0469  0.8906     0.8882     0.9089     0.8859   
+dwsep_k5_w8 (labels only)    19.5469  0.9158     0.9188     0.9330     0.9083   
+dwsep_k3_w16 (labels only)   51.5781  0.9484     0.9486     0.9539     0.9469   
+dwsep_k5_w32 pruned 75 %     60.4258  0.9598     0.9587     0.9651     0.9574   
+dwsep_k5_w32 pruned 50 %    111.4570  0.9696     0.9677     0.9706     0.9685   
+single_k5_w16 pruned 50 %   574.0020  0.9735     0.9738     0.9735     0.9738   
+
+quant                       PTQ 4-bit  QAT 4-bit  PTQ 2-bit  QAT 2-bit  
+model                                                                   
+dwsep_k5_w4 pruned 95 %        0.2500     0.2500     0.2500     0.2500  
+dwsep_k5_w4 pruned 90 %        0.3458     0.3581     0.2633     0.3505  
+dwsep_k5_w4 pruned 75 %        0.5594     0.7394     0.2946     0.5427  
+dwsep_k5_w2 (labels only)      0.6147     0.7860     0.2500     0.5119  
+dwsep_k5_w4 pruned 50 %        0.6788     0.8576     0.2657     0.7151  
+dwsep_k5_w4 (distilled)        0.7155     0.8612     0.3214     0.5896  
+dwsep_k3_w8 (labels only)      0.7719     0.8922     0.2500     0.6532  
+dwsep_k5_w8 (labels only)      0.7777     0.9244     0.2474     0.6992  
+dwsep_k3_w16 (labels only)     0.8147     0.9506     0.2494     0.7374  
+dwsep_k5_w32 pruned 75 %       0.9476     0.9608     0.2430     0.8452  
+dwsep_k5_w32 pruned 50 %       0.9380     0.9694     0.2319     0.8658  
+single_k5_w16 pruned 50 %      0.9653     0.9728     0.2525     0.9186  
+--[4] image -> d5_quantization_4.png
+--[7]                             simulated 8-bit PTQ  real int8  analytic 8-bit kB  \
+model                                                                           
+dwsep_k5_w4 pruned 95 %                  0.2500     0.2500             1.0752   
+dwsep_k5_w4 pruned 90 %                  0.3489     0.3269             1.1592   
+dwsep_k5_w4 pruned 75 %                  0.5652     0.5310             1.4102   
+dwsep_k5_w2 (labels only)                0.7917     0.7707             1.0762   
+dwsep_k5_w4 pruned 50 %                  0.8570     0.8534             1.8291   
+dwsep_k5_w4 (distilled)                  0.8674     0.8643             2.4570   
+dwsep_k3_w8 (labels only)                0.8882     0.8859             5.1016   
+dwsep_k5_w8 (labels only)                0.9188     0.9083             6.2266   
+dwsep_k3_w16 (labels only)               0.9486     0.9469            15.5469   
+dwsep_k5_w32 pruned 75 %                 0.9587     0.9574            25.1680   
+dwsep_k5_w32 pruned 50 %                 0.9677     0.9685            37.9258   
+single_k5_w16 pruned 50 %                0.9738     0.9738           170.5566   
+
+                            torch.save int8 kB  fp32 ms  int8 ms  \
+model                                                              
+dwsep_k5_w4 pruned 95 %                22.5840   1.1040   5.3770   
+dwsep_k5_w4 pruned 90 %                22.5840   1.0826   5.3980   
+dwsep_k5_w4 pruned 75 %                22.5840   1.0812   5.3769   
+dwsep_k5_w2 (labels only)              20.7090   0.9731   3.7037   
+dwsep_k5_w4 pruned 50 %                22.5840   1.0793   5.3791   
+dwsep_k5_w4 (distilled)                22.5840   1.0734   5.3763   
+dwsep_k3_w8 (labels only)              26.7090   1.1570   2.2019   
+dwsep_k5_w8 (labels only)              27.8340   1.2780   2.6521   
+dwsep_k3_w16 (labels only)             39.3965   1.5786   2.8224   
+dwsep_k5_w32 pruned 75 %               85.3965   2.6718   4.6301   
+dwsep_k5_w32 pruned 50 %               85.3965   2.6735   4.6009   
+single_k5_w16 pruned 50 %             286.7168   2.4434   3.2614   
+
+                            int8 - sim (pp)  
+model                                        
+dwsep_k5_w4 pruned 95 %              0.0000  
+dwsep_k5_w4 pruned 90 %             -2.1954  
+dwsep_k5_w4 pruned 75 %             -3.4173  
+dwsep_k5_w2 (labels only)           -2.0967  
+dwsep_k5_w4 pruned 50 %             -0.3613  
+dwsep_k5_w4 (distilled)             -0.3072  
+dwsep_k3_w8 (labels only)           -0.2300  
+dwsep_k5_w8 (labels only)           -1.0498  
+dwsep_k3_w16 (labels only)          -0.1662  
+dwsep_k5_w32 pruned 75 %            -0.1232  
+dwsep_k5_w32 pruned 50 %             0.0838  
+single_k5_w16 pruned 50 %            0.0022  
+--[10] QAT better than PTQ in 32 of 36 model/bit-width pairs
+
+--[10]                                               kB  x smaller than teacher  \
+dwsep_k5_w2 (labels only) | PTQ 2-bit     0.5433               1988.2878   
+dwsep_k5_w2 (labels only) | QAT 2-bit     0.5456               1981.1613   
+dwsep_k5_w2 (labels only) | QAT 4-bit     0.7412               1456.5059   
+dwsep_k5_w2 (labels only) | QAT 8-bit     1.0762               1003.1652   
+dwsep_k5_w4 pruned 50 % | QAT 4-bit       1.4102                765.5734   
+dwsep_k5_w4 (distilled) | QAT 4-bit       1.6191                666.7600   
+dwsep_k5_w4 (distilled) | QAT 8-bit       2.4570                439.3831   
+dwsep_k3_w8 (labels only) | QAT 4-bit     3.3164                325.5265   
+dwsep_k5_w8 (labels only) | QAT 4-bit     3.8789                278.3202   
+dwsep_k5_w8 (labels only) | QAT 8-bit     6.2266                173.3827   
+dwsep_k3_w16 (labels only) | QAT 4-bit    9.2891                116.2204   
+dwsep_k3_w16 (labels only) | QAT 8-bit   15.5469                 69.4402   
+dwsep_k5_w32 pruned 75 % | QAT 4-bit     18.7878                 57.4638   
+dwsep_k5_w32 pruned 50 % | QAT 4-bit     25.1634                 42.9032   
+dwsep_k5_w32 pruned 50 % | QAT 8-bit     37.9258                 28.4655   
+single_k5_w16 pruned 50 % | QAT 4-bit   103.0088                 10.4804   
+single_k5_w16 pruned 50 % | QAT 8-bit   170.5547                  6.3298   
+single_k5_w16 pruned 50 % | PTQ 8-bit   170.5566                  6.3297   
+
+                                        sparsity  wbits  bal_acc      sd  
+dwsep_k5_w2 (labels only) | PTQ 2-bit     0.6827      2   0.2500  0.0000  
+dwsep_k5_w2 (labels only) | QAT 2-bit     0.6691      2   0.5119  0.0383  
+dwsep_k5_w2 (labels only) | QAT 4-bit     0.1365      4   0.7860  0.0162  
+dwsep_k5_w2 (labels only) | QAT 8-bit     0.0112      8   0.8034  0.0210  
+dwsep_k5_w4 pruned 50 % | QAT 4-bit       0.5000      4   0.8576  0.0057  
+dwsep_k5_w4 (distilled) | QAT 4-bit       0.1329      4   0.8612  0.0036  
+dwsep_k5_w4 (distilled) | QAT 8-bit       0.0078      8   0.8839  0.0096  
+dwsep_k3_w8 (labels only) | QAT 4-bit     0.1216      4   0.8922  0.0127  
+dwsep_k5_w8 (labels only) | QAT 4-bit     0.1367      4   0.9244  0.0047  
+dwsep_k5_w8 (labels only) | QAT 8-bit     0.0078      8   0.9330  0.0043  
+dwsep_k3_w16 (labels only) | QAT 4-bit    0.1657      4   0.9506  0.0113  
+dwsep_k3_w16 (labels only) | QAT 8-bit    0.0089      8   0.9539  0.0081  
+dwsep_k5_w32 pruned 75 % | QAT 4-bit      0.7501      4   0.9608  0.0128  
+dwsep_k5_w32 pruned 50 % | QAT 4-bit      0.5002      4   0.9694  0.0074  
+dwsep_k5_w32 pruned 50 % | QAT 8-bit      0.5000      8   0.9706  0.0072  
+single_k5_w16 pruned 50 % | QAT 4-bit     0.5010      4   0.9728  0.0016  
+single_k5_w16 pruned 50 % | QAT 8-bit     0.5000      8   0.9735  0.0033  
+single_k5_w16 pruned 50 % | PTQ 8-bit     0.5000      8   0.9738  0.0012  

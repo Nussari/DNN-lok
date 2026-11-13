@@ -30,7 +30,7 @@ from dataclasses import replace
 from lib.train import Config, run
 from lib.report import run_seeds, compare, pick, log_progress, SEEDS3
 from lib.data import ARTIFACTS
-proto = json.loads((ARTIFACTS / "protocol.json").read_text())
+from lib.report import protocol; proto = protocol()   # c4 protocol with the raised epoch cap
 INPUT = json.loads((ARTIFACTS / "input.json").read_text())
 OPTIM = json.loads((ARTIFACTS / "optim.json").read_text())
 ARCH = {k: {kk: tuple(vv) if isinstance(vv, list) else vv for kk, vv in v.items()}
@@ -108,7 +108,7 @@ nb.md(T["final"])
 nb.md("## Decisions")
 nb.md(T["summary"])
 nb.code("""
-WINNER = pick(t, "small")   # same rule: deep only if clearly better than small, otherwise the simpler model
+WINNER = pick(t, "small")   # highest mean val balanced accuracy wins, whatever its size
 cfg = CAND[WINNER][0]
 REG = dict(aug=cfg.aug, optimizer=cfg.optimizer, weight_decay=cfg.weight_decay, dropout=cfg.dropout)
 _ = (ARTIFACTS / "reg.json").write_text(json.dumps({"winner": WINNER, "arch": ARCH[WINNER], **REG}, default=list))

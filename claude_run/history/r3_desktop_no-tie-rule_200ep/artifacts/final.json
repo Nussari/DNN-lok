@@ -1,0 +1,46 @@
+{
+ "config": {
+  "exp": "c9",
+  "name": "final_lr0.01_s1738",
+  "mode": "gray",
+  "resize": "crop",
+  "size": 128,
+  "probe": false,
+  "normalize": "per_image",
+  "train_frac": 1.0,
+  "train_n": 0,
+  "widths": [
+   16,
+   32,
+   64,
+   128
+  ],
+  "depths": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "kernel": 5,
+  "stem_kernel": 5,
+  "block": "basic",
+  "norm": true,
+  "residual": true,
+  "downsample": "avgpool",
+  "dropout": 0.0,
+  "optimizer": "adam",
+  "lr": 0.009999999999999998,
+  "weight_decay": 0.0,
+  "batch_size": 128,
+  "schedule": "none",
+  "loss": "focal",
+  "sampler": "none",
+  "epochs": 200,
+  "patience": 20,
+  "monitor": "val_bal_acc",
+  "aug": "geometric",
+  "seed": 1738,
+  "extra": {}
+ },
+ "checkpoint": "checkpoints\\c9\\final_s1738.pt"
+}

@@ -1,0 +1,100 @@
+[
+ {
+  "label": "dwsep_k5_w4 pruned 95 %",
+  "run": "d4/dwsep_k5_w4_dist_prune95",
+  "bytes": 959,
+  "bal_acc": 0.25,
+  "sparsity": 0.9499
+ },
+ {
+  "label": "dwsep_k5_w4 pruned 90 %",
+  "run": "d4/dwsep_k5_w4_dist_prune90",
+  "bytes": 1303,
+  "bal_acc": 0.3477,
+  "sparsity": 0.8998
+ },
+ {
+  "label": "dwsep_k5_w4 pruned 75 %",
+  "run": "d4/dwsep_k5_w4_dist_prune75",
+  "bytes": 2331,
+  "bal_acc": 0.5651,
+  "sparsity": 0.75
+ },
+ {
+  "label": "dwsep_k5_w2 (labels only)",
+  "run": "d2/dwsep_k5_w2",
+  "bytes": 2952,
+  "bal_acc": 0.7946,
+  "sparsity": 0.0
+ },
+ {
+  "label": "dwsep_k5_w4 pruned 50 %",
+  "run": "d4/dwsep_k5_w4_dist_prune50",
+  "bytes": 4047,
+  "bal_acc": 0.858,
+  "sparsity": 0.5
+ },
+ {
+  "label": "dwsep_k5_w4 fine-tuned, not pruned",
+  "run": "d4/dwsep_k5_w4_dist_prune0",
+  "bytes": 7264,
+  "bal_acc": 0.8828,
+  "sparsity": 0.0
+ },
+ {
+  "label": "dwsep_k3_w8 (labels only)",
+  "run": "d2/dwsep_k3_w8",
+  "bytes": 15408,
+  "bal_acc": 0.8906,
+  "sparsity": 0.0
+ },
+ {
+  "label": "dwsep_k5_w8 (labels only)",
+  "run": "d2/dwsep_k5_w8",
+  "bytes": 20016,
+  "bal_acc": 0.9158,
+  "sparsity": 0.0
+ },
+ {
+  "label": "dwsep_k3_w16 (labels only)",
+  "run": "d2/dwsep_k3_w16",
+  "bytes": 52816,
+  "bal_acc": 0.9484,
+  "sparsity": 0.0
+ },
+ {
+  "label": "dwsep_k5_w32 pruned 75 %",
+  "run": "d4/dwsep_k5_w32_labe_prune75",
+  "bytes": 61876,
+  "bal_acc": 0.9598,
+  "sparsity": 0.75
+ },
+ {
+  "label": "dwsep_k5_w32 pruned 50 %",
+  "run": "d4/dwsep_k5_w32_labe_prune50",
+  "bytes": 114132,
+  "bal_acc": 0.9696,
+  "sparsity": 0.5
+ },
+ {
+  "label": "dwsep_k5_w32 fine-tuned, not pruned",
+  "run": "d4/dwsep_k5_w32_labe_prune0",
+  "bytes": 212112,
+  "bal_acc": 0.9708,
+  "sparsity": 0.0
+ },
+ {
+  "label": "single_k5_w16 pruned 50 %",
+  "run": "d4/single_k5_w16_dist_prune50",
+  "bytes": 587778,
+  "bal_acc": 0.9735,
+  "sparsity": 0.5
+ },
+ {
+  "label": "single_k5_w16 fine-tuned, not pruned",
+  "run": "d4/single_k5_w16_dist_prune0",
+  "bytes": 1105488,
+  "bal_acc": 0.9738,
+  "sparsity": 0.0
+ }
+]

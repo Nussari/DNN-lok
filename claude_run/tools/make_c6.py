@@ -8,9 +8,8 @@ nb.md("""
 # c6 · Step 6: Optimisation tuning
 
 Input from c5, model still the c4 initial model. Settings are tuned in order of how much they usually matter,
-**one at a time**; each section starts from the winners of the previous ones. 3 seeds per option, same rule
-(`compare`/`pick`: an option replaces the current choice only if it is clearly better; ties keep the current,
-simpler or default, choice).
+**one at a time**; each section starts from the winners of the previous ones. 3 seeds per option. Rule
+(`compare`/`pick`): the option with the highest mean val balanced accuracy wins, whatever its size or cost.
 
 | # | Setting | Options |
 |---|---|---|
@@ -30,10 +29,10 @@ from dataclasses import replace
 from lib.train import Config, run
 from lib.report import run_seeds, compare, pick, sigma_seed, log_progress, curve_test
 from lib.data import ARTIFACTS
-proto = json.loads((ARTIFACTS / "protocol.json").read_text())
+from lib.report import protocol; proto = protocol()   # c4 protocol with the raised epoch cap
 INPUT = json.loads((ARTIFACTS / "input.json").read_text())
 CUR = replace(Config(exp="c6", name="x", monitor=proto["monitor"], patience=proto["patience"], epochs=proto["epochs"]), **INPUT)
-BASE_RUNS = run_seeds(replace(CUR, exp="c4", name="seed")) if INPUT == dict(mode="gray", resize="crop", size=128, normalize="global") \\
+BASE_RUNS = run_seeds(replace(CUR, exp="c4" if CUR.epochs == 60 else "c5", name="seed" if CUR.epochs == 60 else "crop")) if INPUT == dict(mode="gray", resize="crop", size=128, normalize="global") \\
     else run_seeds(replace(CUR, exp="c5", name="input_choice"))
 print(INPUT, proto)
 """)
@@ -59,19 +58,17 @@ else:
 nb.md("""
 ## 1. Learning rate
 
-**Decision rule for ordered numeric settings.** The pairwise rule (each option vs the baseline, 3 vs 3 seeds) needs
-a 5 pp difference, and it ignores that the options lie on a curve. For a sweep, all runs are used at once:
-val balanced accuracy of every run is regressed on log10(LR), with a line (trend) and a parabola (peak).
-* If neither fits significantly (p < 0.05), the curve is flat: keep the default.
-* If one does, the curve has a shape: take the LR with the highest mean. If that is at the edge of the sweep,
-  extend the sweep one step (×3 or ×1/3) and repeat, at most twice.
+**Decision rule for ordered numeric settings.** Take the value with the highest mean. The trend and peak fits
+(val balanced accuracy of every run regressed on log10(LR), line and parabola) are reported to show how strong
+the effect is, but they do not gate the choice. If the best value is at the edge of the sweep, extend the sweep
+one step (×3 or ×1/3) and repeat, at most twice.
 """)
 nb.code("""
 def lr_sweep(cfg, lrs, prefix, base_runs=None, base_lr=None, max_ext=2):
     runs = {lr: (base_runs if lr == base_lr else run_seeds(replace(cfg, name=f"{prefix}_lr{lr:g}", lr=lr))) for lr in lrs}
     for _ in range(max_ext):
         ct = curve_test(runs)
-        if not (ct["has_shape"] and ct["best_at_edge"]):
+        if not ct["best_at_edge"]:
             break
         lo, hi = min(runs), max(runs)
         step = lambda v, up: float(f"{v * (10 / 3 if (f'{v:e}'[0] == '3') == up else 3) ** (1 if up else -1):.1g}")  # 1-3-10 grid
@@ -100,7 +97,7 @@ for (k, rs), c in zip(adam_runs.items(), plt.cm.viridis(np.linspace(0, 1, len(ad
     h = pd.DataFrame(rs[0]["history"]); ax[1].plot(h.epoch, h.val_bal_acc, color=c, label=f"lr {k:g}", lw=1)
 ax[1].set(xlabel="epoch", ylabel="val balanced accuracy", title="val curves (seed 1738)", ylim=(0.5, 1)); ax[1].legend(fontsize=7); ax[1].grid(alpha=0.3)
 plt.tight_layout(); plt.show()
-LR = float(ct_adam["best"]) if ct_adam["has_shape"] else 1e-3
+LR = float(ct_adam["best"])
 CUR = replace(CUR, lr=LR); lr_runs = adam_runs; print("chosen lr:", LR)
 """)
 nb.code("""
@@ -121,7 +118,7 @@ nb.md("## 2. Optimiser")
 nb.code("""
 sgd_runs, ct_sgd = lr_sweep(replace(CUR, optimizer="sgd"), [3e-3, 1e-2, 3e-2, 1e-1], "sgd")
 sgd_runs = sgd_runs  # names: sgd_lr<lr>
-SGD_LR = float(ct_sgd["best"]) if ct_sgd["has_shape"] else 1e-2
+SGD_LR = float(ct_sgd["best"])
 print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in ct_sgd.items() if k != "means"})
 fig, ax = plt.subplots(1, 2, figsize=(13, 3.8))
 show_sweep(adam_runs, ct_adam, "Adam", ax[0]); show_sweep(sgd_runs, ct_sgd, "SGD + Nesterov momentum 0.9", ax[1])
@@ -142,7 +139,7 @@ bs_runs = {str(bs): (cur_runs if bs == 64 else run_seeds(replace(CUR, name=f"{OP
 t = compare(bs_runs, "64", "batch size (learning rate kept fixed)"); display(t)
 ct_bs = curve_test({int(k): v for k, v in bs_runs.items()})
 print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in ct_bs.items() if k != "means"})
-BS = int(ct_bs["best"]) if ct_bs["has_shape"] else 64; CUR = replace(CUR, batch_size=BS); cur_runs = bs_runs[str(BS)]; print("chosen batch size:", BS)
+BS = int(ct_bs["best"]); CUR = replace(CUR, batch_size=BS); cur_runs = bs_runs[str(BS)]; print("chosen batch size:", BS)
 """)
 nb.md(T["bs"])
 

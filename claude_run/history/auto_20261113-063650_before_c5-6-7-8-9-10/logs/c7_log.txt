@@ -1,0 +1,68 @@
+--[1] {'mode': 'gray', 'resize': 'crop', 'size': 128, 'normalize': 'per_image'} {'optimizer': 'adam', 'lr': 0.03, 'batch_size': 128, 'schedule': 'none', 'loss': 'focal', 'sampler': 'none'} {'monitor': 'val_bal_acc', 'patience': 20, 'epochs': 200}
+
+--[3] image -> c7_architecture_3.png
+--[3]                 bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  \
+3x3              0.9337  0.0083  3.0  0.0000  0.0505    0.9293     0.9949   
+5x5              0.9358  0.0070  3.0  0.0021  0.0505    0.9341     0.9940   
+7x7 stem + 3x3   0.9097  0.0168  3.0 -0.0240  0.0505    0.9006     0.9895   
+
+                no_tumor_rec  epochs    params    s/ep  
+3x3                   0.9375    84.0  100244.0  0.5259  
+5x5                   0.9167    75.0  276628.0  0.6290  
+7x7 stem + 3x3        0.9201    66.0  100884.0  0.5709  
+--[3] chosen: 5x5
+
+--[6] image -> c7_architecture_6.png
+--[6]          bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  \
+maxpool   0.9358  0.0070  3.0  0.0000  0.0505    0.9341     0.9940   
+avgpool   0.9389  0.0115  3.0  0.0031  0.0505    0.9371     0.9955   
+stride    0.8990  0.0031  3.0 -0.0368  0.0505    0.8950     0.9879   
+
+         no_tumor_rec   epochs    params    s/ep  
+maxpool        0.9167  75.0000  276628.0  0.6290  
+avgpool        0.9306  78.6667  276628.0  0.6200  
+stride         0.8924  54.6667  276628.0  0.5049  
+--[6] chosen: avgpool
+
+--[9] image -> c7_architecture_9.png
+--[9]                     bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  \
+plain 5              0.9389  0.0115  3.0  0.0000  0.0505    0.9371     0.9955   
+plain 9              0.9313  0.0027  3.0 -0.0076  0.0505    0.9309     0.9941   
+plain 17             0.8903  0.0169  3.0 -0.0486  0.0505    0.8843     0.9857   
+plain 33             0.7844  0.1113  3.0 -0.1544  0.0505    0.7607     0.9541   
+residual 9           0.9519  0.0046  3.0  0.0130  0.0505    0.9514     0.9957   
+residual 17          0.9475  0.0059  3.0  0.0086  0.0505    0.9449     0.9959   
+residual 33          0.9393  0.0077  3.0  0.0004  0.0505    0.9385     0.9941   
+plain 5, no BN       0.2500  0.0000  3.0 -0.6889  0.0505    0.1364     0.5000   
+plain 17, no BN      0.2500  0.0000  3.0 -0.6889  0.0505    0.1364     0.5000   
+residual 17, no BN   0.2500  0.0000  3.0 -0.6889  0.0505    0.1364     0.5290   
+
+                    no_tumor_rec   epochs     params    s/ep  
+plain 5                   0.9306  78.6667   276628.0  0.6200  
+plain 9                   0.9062  69.6667   821108.0  0.9679  
+plain 17                  0.8993  82.6667  1910068.0  1.6940  
+plain 33                  0.8160  82.3333  4087988.0  3.1405  
+residual 9                0.9306  79.3333   832308.0  1.0217  
+residual 17               0.9375  56.3333  1921268.0  1.7626  
+residual 33               0.9271  66.3333  4099188.0  3.2543  
+plain 5, no BN            0.0000  21.0000   276372.0  0.4912  
+plain 17, no BN           0.0000  21.0000  1909092.0  1.4020  
+residual 17, no BN        0.0000  21.0000  1920068.0  1.4662  
+--[10] image -> c7_architecture_10.png
+--[12] best deep candidate: residual 17 | best small candidate: residual 9
+
+--[14] image -> c7_architecture_14.png
+--[14]     bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  no_tumor_rec  \
+16   0.9475  0.0059  3.0  0.0000  0.0505    0.9449     0.9959        0.9375   
+32   0.9475  0.0119  3.0 -0.0000  0.0505    0.9484     0.9948        0.9167   
+64   0.9452  0.0021  3.0 -0.0023  0.0505    0.9423     0.9928        0.9375   
+
+     epochs      params    s/ep  
+16  56.3333   1921268.0  1.7626  
+32  76.0000   7678436.0  3.7865  
+64  71.3333  30700484.0  8.3606  
+--[14] chosen width: 16
+
+--[18] small: 9 conv layers, 832,308 params {'widths': (16, 32, 64, 128), 'depths': (1, 1, 1, 1), 'kernel': 5, 'stem_kernel': 5, 'block': 'basic', 'norm': True, 'residual': True, 'downsample': 'avgpool'}
+deep: 17 conv layers, 1,921,268 params {'widths': (16, 32, 64, 128), 'depths': (2, 2, 2, 2), 'kernel': 5, 'stem_kernel': 5, 'block': 'basic', 'norm': True, 'residual': True, 'downsample': 'avgpool'}
+

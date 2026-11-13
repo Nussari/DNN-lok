@@ -1,0 +1,285 @@
+{
+ "config": {
+  "exp": "d5",
+  "name": "dwsep_k5_w4_dist_prune50_ft32_s1739",
+  "mode": "gray",
+  "resize": "crop",
+  "size": 128,
+  "probe": false,
+  "normalize": "per_image",
+  "train_frac": 1.0,
+  "train_n": 0,
+  "widths": [
+   4,
+   8,
+   16,
+   32
+  ],
+  "depths": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "kernel": 5,
+  "stem_kernel": 5,
+  "block": "dwsep",
+  "norm": true,
+  "residual": false,
+  "downsample": "avgpool",
+  "dropout": 0.0,
+  "optimizer": "adam",
+  "lr": 0.003,
+  "weight_decay": 0.0,
+  "batch_size": 64,
+  "schedule": "none",
+  "loss": "label_smoothing",
+  "sampler": "none",
+  "epochs": 20,
+  "patience": 10,
+  "monitor": "val_bal_acc",
+  "aug": "mild",
+  "seed": 1739,
+  "extra": {
+   "kd": {
+    "T": 4,
+    "alpha": 0.5
+   },
+   "prune": {
+    "sparsity": 0.5,
+    "ramp": 0
+   },
+   "init": {
+    "exp": "d4",
+    "name": "dwsep_k5_w4_dist_prune50_s1739"
+   }
+  }
+ },
+ "history": [
+  {
+   "epoch": 1,
+   "lr": 0.003,
+   "train_loss": 0.5877279873077687,
+   "train_bal_acc": 0.8644615520329453,
+   "val_loss": 0.47854307293891907,
+   "val_bal_acc": 0.8367610398860399,
+   "val_macro_f1": 0.8264705017904108,
+   "val_tumor_auc": 0.977737205615942,
+   "time": 0.6140038967132568
+  },
+  {
+   "epoch": 2,
+   "lr": 0.003,
+   "train_loss": 0.5904294976821313,
+   "train_bal_acc": 0.8603820702242945,
+   "val_loss": 0.445620059967041,
+   "val_bal_acc": 0.8470886752136753,
+   "val_macro_f1": 0.840623180468395,
+   "val_tumor_auc": 0.9791666666666666,
+   "time": 1.2624707221984863
+  },
+  {
+   "epoch": 3,
+   "lr": 0.003,
+   "train_loss": 0.5902491381535163,
+   "train_bal_acc": 0.8602470076491067,
+   "val_loss": 0.43805328011512756,
+   "val_bal_acc": 0.840099715099715,
+   "val_macro_f1": 0.8397435897435898,
+   "val_tumor_auc": 0.9810065670289855,
+   "time": 1.8787517547607422
+  },
+  {
+   "epoch": 4,
+   "lr": 0.003,
+   "train_loss": 0.5830087033601907,
+   "train_bal_acc": 0.8591055686374316,
+   "val_loss": 0.4408465623855591,
+   "val_bal_acc": 0.8476228632478633,
+   "val_macro_f1": 0.8413857366960751,
+   "val_tumor_auc": 0.9805395153985508,
+   "time": 2.4798202514648438
+  },
+  {
+   "epoch": 5,
+   "lr": 0.003,
+   "train_loss": 0.5866881512678587,
+   "train_bal_acc": 0.8638269390531181,
+   "val_loss": 0.43607836961746216,
+   "val_bal_acc": 0.8558360042735043,
+   "val_macro_f1": 0.8499192229695007,
+   "val_tumor_auc": 0.9804262907608696,
+   "time": 3.0952699184417725
+  },
+  {
+   "epoch": 6,
+   "lr": 0.003,
+   "train_loss": 0.5814210575360518,
+   "train_bal_acc": 0.8625447624948933,
+   "val_loss": 0.4505256414413452,
+   "val_bal_acc": 0.8518741096866097,
+   "val_macro_f1": 0.8438674518409399,
+   "val_tumor_auc": 0.9797186367753622,
+   "time": 3.711683750152588
+  },
+  {
+   "epoch": 7,
+   "lr": 0.003,
+   "train_loss": 0.5901804337134728,
+   "train_bal_acc": 0.8652552720400362,
+   "val_loss": 0.43070748448371887,
+   "val_bal_acc": 0.8473557692307693,
+   "val_macro_f1": 0.8461738115263969,
+   "val_tumor_auc": 0.9803272192028986,
+   "time": 4.327819347381592
+  },
+  {
+   "epoch": 8,
+   "lr": 0.003,
+   "train_loss": 0.5820189347633948,
+   "train_bal_acc": 0.8682976150208594,
+   "val_loss": 0.43847501277923584,
+   "val_bal_acc": 0.8437500000000001,
+   "val_macro_f1": 0.8403696939644048,
+   "val_tumor_auc": 0.979987545289855,
+   "time": 4.946274757385254
+  },
+  {
+   "epoch": 9,
+   "lr": 0.003,
+   "train_loss": 0.5777934661278358,
+   "train_bal_acc": 0.8649476860274087,
+   "val_loss": 0.4444841742515564,
+   "val_bal_acc": 0.8438612891737891,
+   "val_macro_f1": 0.8415427122528737,
+   "val_tumor_auc": 0.9787279211956521,
+   "time": 5.566015005111694
+  },
+  {
+   "epoch": 10,
+   "lr": 0.003,
+   "train_loss": 0.5793203647320088,
+   "train_bal_acc": 0.8659355338785124,
+   "val_loss": 0.43709293007850647,
+   "val_bal_acc": 0.8544782763532763,
+   "val_macro_f1": 0.8509006019495353,
+   "val_tumor_auc": 0.9802281476449276,
+   "time": 6.1879706382751465
+  },
+  {
+   "epoch": 11,
+   "lr": 0.003,
+   "train_loss": 0.5742352687395536,
+   "train_bal_acc": 0.8708679672478201,
+   "val_loss": 0.4263051748275757,
+   "val_bal_acc": 0.8513621794871795,
+   "val_macro_f1": 0.8523099487152151,
+   "val_tumor_auc": 0.9807518115942029,
+   "time": 6.800209283828735
+  },
+  {
+   "epoch": 12,
+   "lr": 0.003,
+   "train_loss": 0.5739115490363195,
+   "train_bal_acc": 0.8658124533423949,
+   "val_loss": 0.42364099621772766,
+   "val_bal_acc": 0.8549011752136751,
+   "val_macro_f1": 0.855049206313143,
+   "val_tumor_auc": 0.9808650362318841,
+   "time": 7.415296792984009
+  },
+  {
+   "epoch": 13,
+   "lr": 0.003,
+   "train_loss": 0.5800354476158436,
+   "train_bal_acc": 0.864919016966276,
+   "val_loss": 0.4311763346195221,
+   "val_bal_acc": 0.8460425569800569,
+   "val_macro_f1": 0.8439601291355086,
+   "val_tumor_auc": 0.9795629528985507,
+   "time": 8.054383516311646
+  },
+  {
+   "epoch": 14,
+   "lr": 0.003,
+   "train_loss": 0.5738835499836848,
+   "train_bal_acc": 0.8632880003120995,
+   "val_loss": 0.4334263205528259,
+   "val_bal_acc": 0.8460425569800569,
+   "val_macro_f1": 0.8421237609601755,
+   "val_tumor_auc": 0.9809924139492753,
+   "time": 8.677015781402588
+  },
+  {
+   "epoch": 15,
+   "lr": 0.003,
+   "train_loss": 0.5743664773610923,
+   "train_bal_acc": 0.8634020694655075,
+   "val_loss": 0.4389529228210449,
+   "val_bal_acc": 0.8384303774928774,
+   "val_macro_f1": 0.8364685611104228,
+   "val_tumor_auc": 0.9793931159420289,
+   "time": 9.297542810440063
+  }
+ ],
+ "best_epoch": 5,
+ "epochs_run": 15,
+ "val": {
+  "bal_acc": 0.8558360042735043,
+  "macro_f1": 0.8499192229695007,
+  "accuracy": 0.8569711538461539,
+  "recall": {
+   "glioma": 0.859,
+   "meningioma": 0.7639,
+   "no_tumor": 0.8438,
+   "pituitary": 0.9567
+  },
+  "precision": {
+   "glioma": 0.8816,
+   "meningioma": 0.8777,
+   "no_tumor": 0.802,
+   "pituitary": 0.8326
+  },
+  "tumor_auc": 0.9804262907608696,
+  "tumor_sens": 0.9728260869565217,
+  "tumor_spec": 0.84375,
+  "confusion": [
+   [
+    268,
+    19,
+    12,
+    13
+   ],
+   [
+    25,
+    165,
+    4,
+    22
+   ],
+   [
+    7,
+    3,
+    81,
+    5
+   ],
+   [
+    4,
+    1,
+    4,
+    199
+   ]
+  ]
+ },
+ "n_params": 1912,
+ "n_conv": 5,
+ "sec_per_epoch": 0.620522928237915,
+ "device": "cuda",
+ "size": {
+  "bytes": 4047,
+  "wbits": 32,
+  "n_weights": 1716,
+  "nonzero": 858,
+  "sparsity": 0.5,
+  "sparse_storage": true
+ }
+}

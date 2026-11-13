@@ -8,8 +8,8 @@ nb.md("""
 # c5 · Step 5: Input experiments
 
 Model and training are fixed to the c4 initial model. Only the **input** changes. Every option runs with 3 seeds
-and is judged with the c2/c4 rule (`lib.report.compare`): a difference of 3-seed means counts if it exceeds
-2·σ_seed·√(2/3). Ties go to the simpler or cheaper option.
+and the option with the highest mean val balanced accuracy wins (`lib.report.pick`), whatever its size or cost.
+One exception, for validity rather than simplicity: geometry also weighs the shortcut probe (section 1).
 
 | # | Question | Options |
 |---|---|---|
@@ -32,8 +32,10 @@ from dataclasses import replace
 from lib.train import Config, run
 from lib.report import run_seeds, compare, pick, sigma_seed, log_progress, SEEDS3, curve_test
 from lib.data import ARTIFACTS, load_split
-proto = json.loads((ARTIFACTS / "protocol.json").read_text())
-BASE = Config(exp="c4", name="seed", monitor=proto["monitor"], patience=proto["patience"], epochs=proto["epochs"])  # = c4 seed runs
+from lib.report import protocol; proto = protocol()   # c4 protocol with the raised epoch cap
+# at c4's 60-epoch cap the crop baseline is exactly c4's seed runs; at a raised cap (round r3) c5 trains its own
+BASE = (Config(exp="c4", name="seed", monitor=proto["monitor"], patience=proto["patience"], epochs=proto["epochs"]) if proto["epochs"] == 60
+        else Config(exp="c5", name="crop", monitor=proto["monitor"], patience=proto["patience"], epochs=proto["epochs"]))
 C5 = replace(BASE, exp="c5")
 print(proto, f"sigma_seed={sigma_seed():.4f}")
 """)
@@ -46,7 +48,8 @@ geo = {"stretch": run_seeds(replace(C5, name="stretch", resize="stretch")),
 tg = compare(geo, "crop", "geometry: val balanced accuracy"); display(tg)
 probe = {g: run_seeds(replace(C5, name=f"probe_{g}", resize=g, probe=True)) for g in ["stretch", "pad", "crop"]}
 tp = compare(probe, "crop", "probe (head blacked out): val balanced accuracy"); display(tp)
-# rule: among geometries whose val score ties with the best one, take the one with the least signal outside the head
+# validity guard (not a simplicity rule): among geometries within 2 standard errors of the best val score, take the
+# one with the least signal outside the head, so the model is not rewarded for learning a border/scanner shortcut
 best = tg.bal_acc.astype(float).max()
 ok = [g for g in geo if tg.loc[g, "bal_acc"] >= best - tg.loc[g, "needed"]]
 GEOM = min(ok, key=lambda g: tp.loc[g, "bal_acc"])
@@ -86,7 +89,7 @@ res = {"64": run_seeds(replace(C5, name="r64", size=64, resize=GEOM)), "128": ge
 t = compare(res, "128", "resolution"); display(t)
 ct = curve_test({int(k): v for k, v in res.items()})   # ordered setting: test the whole curve (rule introduced in c6)
 print({k: (round(float(v), 4) if not isinstance(v, (dict, tuple, bool)) else v) for k, v in ct.items() if k != "means"})
-SIZE = int(ct["best"]) if ct["has_shape"] else 128; print("chosen:", SIZE)
+SIZE = int(ct["best"]); print("chosen:", SIZE)
 """)
 nb.md(T["res"])
 nb.md("## Decisions")

@@ -41,6 +41,14 @@ T["noise"] = """
 * Otherwise it is a **tie**. Ties go to the simpler, cheaper or more standard option.
 * For decisions that shape the final model (architecture, regularisation), close calls get 2 extra seeds and
   the means are compared.
+
+**Update (round r2, after c6 to c10 had run once with this rule).** The rule was dropped for model selection.
+With σ_seed = 0.031 from c4 the bar for 3 vs 3 seeds is 5 pp, but once the models were tuned their seed sd was
+0.004 to 0.009, and no change in c5 to c8 reached 5 pp: the rule kept the baseline at every step, including
+changes that measured as clear gains (r1: 5x5 kernels +2.0 pp, residual connections +2.9 pp, augmentation +1.2
+to +1.8 pp). The goal is the best possible model regardless of size, so from round r2 on **the option with the
+highest mean val balanced accuracy wins**. The noise level is still reported next to every comparison, so a
+reader can see which wins are within noise. The record of both rules is in the history notebook.
 """
 T["prev"] = """
 **Result.** The same classifier (sensitivity 0.98, specificity 0.90) has a PPV of 0.987 on this dataset, but
@@ -86,7 +94,7 @@ T["summary"] = """
 | Primary metric | **balanced accuracy** | fixed chance level; linear; protects small classes (sections 1-2) |
 | Secondary metrics | macro-F1, per-class recall, confusion matrix, tumour AUC, sensitivity/specificity | section 1, section 3 |
 | Not reported as headline | accuracy, weighted-F1, precision/PPV | dumb-classifier test, prevalence test |
-| Meaningful difference | Δ > 2·σ_seed and paired-bootstrap P < 0.05; ties go to the simpler option | section 2 (σ_seed in c4) |
+| Meaningful difference | Δ > 2·σ_seed and paired-bootstrap P < 0.05; ties go to the simpler option (rounds r0, r1). **From r2: highest mean wins**, noise level reported | section 2 (σ_seed in c4) |
 | Evaluation set | clean val for everything; test once at the end | c1, section 4 |
 | Early-stopping monitor | decided in c4 from the curves | section 4 |
 | Threshold rule | tumour sensitivity ≥ 0.98 on val | section 5 |

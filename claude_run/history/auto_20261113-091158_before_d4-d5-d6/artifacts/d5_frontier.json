@@ -1,0 +1,110 @@
+[
+ {
+  "label": "dwsep_k5_w2 (labels only) | PTQ 2-bit",
+  "run": "d5/dwsep_k5_w2_ptq2",
+  "bytes": 556,
+  "bal_acc": 0.25
+ },
+ {
+  "label": "dwsep_k5_w2 (labels only) | QAT 2-bit",
+  "run": "d5/dwsep_k5_w2_qat2",
+  "bytes": 558,
+  "bal_acc": 0.5119
+ },
+ {
+  "label": "dwsep_k5_w2 (labels only) | QAT 4-bit",
+  "run": "d5/dwsep_k5_w2_qat4",
+  "bytes": 759,
+  "bal_acc": 0.786
+ },
+ {
+  "label": "dwsep_k5_w2 (labels only) | QAT 8-bit",
+  "run": "d5/dwsep_k5_w2_qat8",
+  "bytes": 1102,
+  "bal_acc": 0.8034
+ },
+ {
+  "label": "dwsep_k5_w4 pruned 50 % | QAT 4-bit",
+  "run": "d5/dwsep_k5_w4_dist_prune50_qat4",
+  "bytes": 1444,
+  "bal_acc": 0.8576
+ },
+ {
+  "label": "dwsep_k5_w4 (distilled) | QAT 4-bit",
+  "run": "d5/dwsep_k5_w4_kdT4a0.5_qat4",
+  "bytes": 1658,
+  "bal_acc": 0.8612
+ },
+ {
+  "label": "dwsep_k5_w4 (distilled) | QAT 8-bit",
+  "run": "d5/dwsep_k5_w4_kdT4a0.5_qat8",
+  "bytes": 2516,
+  "bal_acc": 0.8839
+ },
+ {
+  "label": "dwsep_k3_w8 (labels only) | QAT 4-bit",
+  "run": "d5/dwsep_k3_w8_qat4",
+  "bytes": 3396,
+  "bal_acc": 0.8922
+ },
+ {
+  "label": "dwsep_k5_w8 (labels only) | QAT 4-bit",
+  "run": "d5/dwsep_k5_w8_qat4",
+  "bytes": 3972,
+  "bal_acc": 0.9244
+ },
+ {
+  "label": "dwsep_k5_w8 (labels only) | QAT 8-bit",
+  "run": "d5/dwsep_k5_w8_qat8",
+  "bytes": 6376,
+  "bal_acc": 0.933
+ },
+ {
+  "label": "dwsep_k3_w16 (labels only) | QAT 4-bit",
+  "run": "d5/dwsep_k3_w16_qat4",
+  "bytes": 9512,
+  "bal_acc": 0.9506
+ },
+ {
+  "label": "dwsep_k3_w16 (labels only) | QAT 8-bit",
+  "run": "d5/dwsep_k3_w16_qat8",
+  "bytes": 15920,
+  "bal_acc": 0.9539
+ },
+ {
+  "label": "dwsep_k5_w32 pruned 75 % | QAT 4-bit",
+  "run": "d5/dwsep_k5_w32_labe_prune75_qat4",
+  "bytes": 19238,
+  "bal_acc": 0.9608
+ },
+ {
+  "label": "dwsep_k5_w32 pruned 50 % | QAT 4-bit",
+  "run": "d5/dwsep_k5_w32_labe_prune50_qat4",
+  "bytes": 25767,
+  "bal_acc": 0.9694
+ },
+ {
+  "label": "dwsep_k5_w32 pruned 50 % | QAT 8-bit",
+  "run": "d5/dwsep_k5_w32_labe_prune50_qat8",
+  "bytes": 38836,
+  "bal_acc": 0.9706
+ },
+ {
+  "label": "single_k5_w16 pruned 50 % | QAT 4-bit",
+  "run": "d5/single_k5_w16_dist_prune50_qat4",
+  "bytes": 105481,
+  "bal_acc": 0.9728
+ },
+ {
+  "label": "single_k5_w16 pruned 50 % | QAT 8-bit",
+  "run": "d5/single_k5_w16_dist_prune50_qat8",
+  "bytes": 174648,
+  "bal_acc": 0.9735
+ },
+ {
+  "label": "single_k5_w16 pruned 50 % | PTQ 8-bit",
+  "run": "d5/single_k5_w16_dist_prune50_ptq8",
+  "bytes": 174650,
+  "bal_acc": 0.9738
+ }
+]

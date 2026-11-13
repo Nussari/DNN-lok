@@ -1,0 +1,87 @@
+--[1] starting points:
+
+--[1]                 block  kernel  w0       method    bytes  bal_acc
+name                                                            
+dwsep_k5_w32    dwsep       5  32  labels only   212112   0.9643
+single_k5_w16  single       5  16    distilled  1105488   0.9710
+dwsep_k5_w4     dwsep       5   4    distilled     7264   0.8685
+--[3] dwsep_k5_w32
+
+--[3]       sparsity        kB  x smaller than teacher  bal_acc      sd  tumor_auc
+0 %       0.00  207.1406                  5.2118   0.9643  0.0009     0.9979
+50 %      0.50  111.4570                  9.6860   0.9696  0.0079     0.9977
+75 %      0.75   60.4258                 17.8662   0.9598  0.0075     0.9967
+90 %      0.90   29.8086                 36.2170   0.8624  0.0144     0.9811
+95 %      0.95   19.6016                 55.0761   0.4685  0.1895     0.7776
+--[3] single_k5_w16
+
+--[3]       sparsity         kB  x smaller than teacher  bal_acc      sd  tumor_auc
+0 %       0.00  1079.5781                  1.0000   0.9710  0.0032     0.9978
+50 %      0.50   574.0020                  1.8808   0.9735  0.0009     0.9980
+75 %      0.75   304.3613                  3.5470   0.9692  0.0012     0.9973
+90 %      0.90   142.5801                  7.5717   0.9257  0.0166     0.9919
+95 %      0.95    88.6504                 12.1779   0.7743  0.0755     0.9830
+--[3] dwsep_k5_w4
+
+--[3]       sparsity      kB  x smaller than teacher  bal_acc      sd  tumor_auc
+0 %     0.0000  7.0938                152.1872   0.8685  0.0086     0.9786
+50 %    0.5000  3.9521                273.1623   0.8580  0.0086     0.9766
+75 %    0.7500  2.2764                474.2548   0.5651  0.2739     0.8850
+90 %    0.8998  1.2725                848.4175   0.3477  0.1692     0.5928
+95 %    0.9499  0.9365               1152.7508   0.2500  0.0000     0.5000
+--[4] image -> d4_pruning_4.png
+--[7]              from  to width                            how        kB  bal_acc  \
+0    dwsep_k5_w32        16   slimmed from w32, fine-tuned   60.5781   0.9359   
+1    dwsep_k5_w32        16  trained directly, labels only   60.5781   0.9415   
+2    dwsep_k5_w32        16    trained directly, distilled   60.5781   0.9441   
+3    dwsep_k5_w32         8   slimmed from w32, fine-tuned   19.5469   0.8533   
+4    dwsep_k5_w32         8  trained directly, labels only   19.5469   0.9158   
+5    dwsep_k5_w32         8    trained directly, distilled   19.5469   0.8983   
+6   single_k5_w16         8   slimmed from w16, fine-tuned  271.0469   0.9574   
+7   single_k5_w16         8  trained directly, labels only  271.0469   0.9527   
+8   single_k5_w16         8    trained directly, distilled  271.0469   0.9543   
+9   single_k5_w16         4   slimmed from w16, fine-tuned   68.3438   0.8847   
+10  single_k5_w16         4  trained directly, labels only   68.3438   0.9293   
+11  single_k5_w16         4    trained directly, distilled   68.3438   0.9302   
+
+        sd  
+0   0.0037  
+1   0.0018  
+2   0.0088  
+3   0.0018  
+4   0.0062  
+5   0.0130  
+6   0.0049  
+7   0.0142  
+8   0.0172  
+9   0.0036  
+10  0.0047  
+11  0.0033  
+--[10]                                   kB  x smaller than teacher  params  \
+dwsep_k5_w4 pruned 95 %       0.9365               1152.7508    1912   
+dwsep_k5_w4 pruned 90 %       1.2725                848.4175    1912   
+dwsep_k5_w4 pruned 75 %       2.2764                474.2548    1912   
+dwsep_k5_w2 (labels only)     2.8828                374.4878     786   
+dwsep_k5_w4 pruned 50 %       3.9521                273.1623    1912   
+dwsep_k5_w4 (distilled)       7.0938                152.1872    1912   
+dwsep_k3_w8 (labels only)    15.0469                 71.7477    4044   
+dwsep_k5_w8 (labels only)    19.5469                 55.2302    5196   
+dwsep_k3_w16 (labels only)   51.5781                 20.9309   13588   
+dwsep_k5_w32 pruned 75 %     60.4258                 17.8662   53796   
+dwsep_k5_w32 pruned 50 %    111.4570                  9.6860   53796   
+single_k5_w16 pruned 50 %   574.0020                  1.8808  276628   
+
+                            sparsity  bal_acc      sd  
+dwsep_k5_w4 pruned 95 %       0.9499   0.2500  0.0000  
+dwsep_k5_w4 pruned 90 %       0.8998   0.3477  0.1692  
+dwsep_k5_w4 pruned 75 %       0.7500   0.5651  0.2739  
+dwsep_k5_w2 (labels only)     0.0000   0.7946  0.0248  
+dwsep_k5_w4 pruned 50 %       0.5000   0.8580  0.0086  
+dwsep_k5_w4 (distilled)       0.0000   0.8685  0.0086  
+dwsep_k3_w8 (labels only)     0.0000   0.8906  0.0148  
+dwsep_k5_w8 (labels only)     0.0000   0.9158  0.0062  
+dwsep_k3_w16 (labels only)    0.0000   0.9484  0.0045  
+dwsep_k5_w32 pruned 75 %      0.7500   0.9598  0.0075  
+dwsep_k5_w32 pruned 50 %      0.5000   0.9696  0.0079  
+single_k5_w16 pruned 50 %     0.5000   0.9735  0.0009  
+--[10] image -> d4_pruning_10.png

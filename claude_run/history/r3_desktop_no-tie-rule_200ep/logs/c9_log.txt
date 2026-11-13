@@ -1,0 +1,48 @@
+--[1] Config(exp='c9', name='x', mode='gray', resize='crop', size=128, probe=False, normalize='per_image', train_frac=1.0, train_n=0, widths=(16, 32, 64, 128), depths=(1, 1, 1, 1), kernel=5, stem_kernel=5, block='basic', norm=True, residual=True, downsample='avgpool', dropout=0.0, optimizer='adam', lr=0.03, weight_decay=0.0, batch_size=128, schedule='none', loss='focal', sampler='none', epochs=200, patience=20, monitor='val_bal_acc', aug='geometric', seed=1738, extra={})
+
+--[3] image -> c9_final_model_3.png
+--[3]       bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  no_tumor_rec  \
+0.01   0.9601  0.0054  3.0  0.0080  0.0505    0.9565     0.9965        0.9549   
+0.03   0.9521  0.0017  3.0  0.0000  0.0505    0.9451     0.9960        0.9722   
+0.09   0.9391  0.0082  3.0 -0.0129  0.0505    0.9319     0.9946        0.9583   
+
+       epochs    params    s/ep  
+0.01  81.0000  832308.0  1.0781  
+0.03  55.3333  832308.0  1.0661  
+0.09  60.3333  832308.0  1.0614  
+--[3] {'slope_per_decade': -0.0219, 'slope_ci': (np.float64(-0.03304496422760173), np.float64(-0.010852938663831422)), 'p_linear': 0.0023, 'p_quadratic': 0.5711, 'has_shape': True, 'best': 0.01, 'best_at_edge': True}
+final learning rate: 0.009999999999999998
+
+--[6] final model: 9 conv layers, 832,308 parameters, 1.1 s/epoch on cuda
+
+--[6] C:\Users\vikto\AppData\Local\Temp\ipykernel_20564\1036243526.py:8: Pandas4Warning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. The existing dtype float64 cannot hold the value being set, so the result has dtype object. Cast the object to object before this operation to retain the current behavior.
+  S = pd.DataFrame(rows).T; S.loc["mean ± sd"] = [f"{S[c].mean():.3f} ± {S[c].std():.3f}" for c in S.columns]
+
+--[6]                  bal_acc       macro_f1      tumor_auc     rec glioma  \
+seed 1738       0.952435       0.939874       0.996632         0.9231   
+seed 1739       0.958912       0.955585        0.99632         0.9423   
+seed 1740       0.968015       0.966157        0.99666         0.9712   
+mean ± sd  0.960 ± 0.008  0.954 ± 0.013  0.997 ± 0.000  0.946 ± 0.024   
+
+          rec meningioma   rec no_tumor  rec pituitary       best_epoch  
+seed 1738         0.9259         0.9896         0.9712             46.0  
+seed 1739         0.9398         0.9583         0.9952             49.0  
+seed 1740         0.9722         0.9479         0.9808             65.0  
+mean ± sd  0.946 ± 0.024  0.965 ± 0.022  0.982 ± 0.012  53.333 ± 10.214  
+--[7] FINAL (seed 1738) on clean val: balanced accuracy 0.952  [95% CI 0.935, 0.966]
+  recall glioma      0.949  [0.918, 0.968]  (296/312)
+  recall meningioma  0.907  [0.861, 0.939]  (196/216)
+  recall no_tumor    0.958  [0.898, 0.984]  (92/96)
+  recall pituitary   0.990  [0.966, 0.997]  (206/208)
+
+--[7] image -> c9_final_model_7.png
+--[9] image -> c9_final_model_9.png
+--[9] c4 initial                  0.8956
+c5 input                    0.9070
+c6 optimisation             0.9406
+c7 small arch               0.9519
+c7 deep arch                0.9475
+c8 regularised small        0.9680
+c8 regularised deep         0.9564
+c9 final (LR re-checked)    0.9598
+dtype: float64

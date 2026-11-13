@@ -1,0 +1,60 @@
+--[1] {'monitor': 'val_bal_acc', 'patience': 20, 'epochs': 60} sigma_seed=0.0309
+
+--[3] image -> c5_input_experiments_3.png
+--[3]          bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  \
+stretch   0.8818  0.0108  3.0 -0.0138  0.0505    0.8722     0.9894   
+pad       0.9031  0.0087  3.0  0.0075  0.0505    0.8939     0.9898   
+crop      0.8956  0.0088  3.0  0.0000  0.0505    0.8879     0.9905   
+
+         no_tumor_rec   epochs    params    s/ep  
+stretch        0.8959  39.6667  100244.0  3.8038  
+pad            0.9444  49.0000  100244.0  3.7969  
+crop           0.9305  60.0000  100244.0  3.8037  
+--[3] image -> c5_input_experiments_3.png
+--[3]          bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  \
+stretch   0.7968  0.0284  3.0  0.0587  0.0505    0.7634     0.9529   
+pad       0.7872  0.0308  3.0  0.0491  0.0505    0.7568     0.9499   
+crop      0.7381  0.0185  3.0  0.0000  0.0505    0.6995     0.9408   
+
+         no_tumor_rec   epochs    params    s/ep  
+stretch        0.8958  40.3333  100244.0  3.9665  
+pad            0.8715  48.3333  100244.0  4.0613  
+crop           0.8611  44.3333  100244.0  4.0724  
+--[3] tie with best val score: ['stretch', 'pad', 'crop'] -> lowest probe score: crop
+
+--[4] image -> c5_input_experiments_4.png
+--[7] image -> c5_input_experiments_7.png
+--[7]              bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  \
+gray (1 ch)   0.8956  0.0088  3.0  0.0000  0.0505    0.8879     0.9905   
+rgb (3 ch)    0.8772  0.0256  3.0 -0.0184  0.0505    0.8596     0.9912   
+
+             no_tumor_rec  epochs    params    s/ep  
+gray (1 ch)        0.9305    60.0  100244.0  3.8037  
+rgb (3 ch)         0.9549    50.0  100532.0  4.3720  
+--[7] chosen: gray
+
+--[10] image -> c5_input_experiments_10.png
+--[10]            bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  \
+global      0.8956  0.0088  3.0  0.0000  0.0505    0.8879     0.9905   
+per image   0.9006  0.0155  3.0  0.0049  0.0505    0.8928     0.9912   
+
+           no_tumor_rec  epochs    params    s/ep  
+global           0.9305    60.0  100244.0  3.8037  
+per image        0.9167    51.0  100244.0  4.1933  
+--[10] chosen: per_image
+
+--[13] image -> c5_input_experiments_13.png
+--[13]      bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  no_tumor_rec  \
+64    0.8855  0.0131  3.0 -0.0101  0.0505    0.8769     0.9880        0.9027   
+128   0.8956  0.0088  3.0  0.0000  0.0505    0.8879     0.9905        0.9305   
+192   0.8457  0.0213  3.0 -0.0499  0.0505    0.8392     0.9889        0.8750   
+
+      epochs    params    s/ep  
+64   48.0000  100244.0  1.2703  
+128  60.0000  100244.0  3.8037  
+192  42.3333  100244.0  9.0873  
+--[13] {'slope_per_decade': -0.0708, 'slope_ci': (np.float64(-0.16450081073757583), np.float64(0.02289374512822831)), 'p_linear': 0.1171, 'p_quadratic': 0.0183, 'has_shape': True, 'best': 128.0, 'best_at_edge': False}
+chosen: 128
+
+--[17] {'mode': 'gray', 'resize': 'crop', 'size': 128, 'normalize': 'per_image'} -> mean val bal. acc 0.8828
+

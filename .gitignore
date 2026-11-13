@@ -2,9 +2,8 @@
 data/
 # rebuilt automatically from data/
 claude_run/cache/
-# model weights (large); results/ holds every metric and val probability
-claude_run/checkpoints/
-claude_run/tools/_out/
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store
+# (model weights in claude_run/checkpoints/ and run logs in claude_run/tools/_out/ are kept in git:
+#  the final model, the compressed models and the logs are part of the record)

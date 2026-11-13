@@ -1,0 +1,1 @@
+{"optimizer": "adam", "lr": 0.03, "batch_size": 64, "schedule": "none", "loss": "label_smoothing", "sampler": "none"}

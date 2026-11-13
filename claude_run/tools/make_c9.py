@@ -25,14 +25,14 @@ from lib.report import run_seeds, compare, pick, SEEDS3, curve_test
 from lib.evaluation import bootstrap_ci, wilson
 from lib.models import n_params, n_conv_layers
 from lib.data import ARTIFACTS, CLASSES, SEED
-proto = json.loads((ARTIFACTS / "protocol.json").read_text())
+from lib.report import protocol; proto = protocol()   # c4 protocol with the raised epoch cap
 INPUT = json.loads((ARTIFACTS / "input.json").read_text())
 OPTIM = json.loads((ARTIFACTS / "optim.json").read_text())
 REG = json.loads((ARTIFACTS / "reg.json").read_text())
 ARCH = {k: tuple(v) if isinstance(v, list) else v for k, v in REG["arch"].items()}
 SEEDS = SEEDS3 if REG["winner"] == "small" else SEEDS3[:2]
-CUR = replace(Config(exp="c9", name="x", monitor=proto["monitor"], patience=proto["patience"], epochs=proto["epochs"]), **INPUT, **OPTIM, **ARCH,
-              aug=REG["aug"], optimizer=REG["optimizer"], weight_decay=REG["weight_decay"], dropout=REG["dropout"])
+CUR = replace(Config(exp="c9", name="x", monitor=proto["monitor"], patience=proto["patience"], epochs=proto["epochs"]), **{**INPUT, **OPTIM, **ARCH,
+              "aug": REG["aug"], "optimizer": REG["optimizer"], "weight_decay": REG["weight_decay"], "dropout": REG["dropout"]})
 print(CUR)
 """)
 
@@ -44,7 +44,7 @@ lr_runs = {lr0 * f: run_seeds(replace(CUR, name="final" if f == 1 else f"lr{lr0 
 t = compare({f"{k:.2g}": v for k, v in lr_runs.items()}, f"{lr0:.2g}", "learning rate on the final configuration"); display(t)
 ct = curve_test(lr_runs)   # same rule as c6 for ordered settings
 print({k: (round(float(v), 4) if not isinstance(v, (dict, tuple, bool)) else v) for k, v in ct.items() if k != "means"})
-LR = float(ct["best"]) if ct["has_shape"] else lr0
+LR = float(ct["best"])
 CUR = replace(CUR, lr=LR); print("final learning rate:", LR)
 """)
 nb.md(T["lr"])

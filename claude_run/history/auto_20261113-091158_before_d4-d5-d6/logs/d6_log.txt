@@ -1,0 +1,97 @@
+--[1] 136 compressed configurations, 408 models
+
+--[1] kind
+distilled student        21
+quantized (simulated)    72
+real int8                12
+slimmed                   4
+student, labels only     15
+unstructured pruned      12
+dtype: int64
+--[2] image -> d6_final_2.png
+--[2]                                                      kind        kB  \
+d5/dwsep_k5_w2_ptq2                 quantized (simulated)    0.5433   
+d5/dwsep_k5_w2_qat2                 quantized (simulated)    0.5456   
+d5/dwsep_k5_w2_qat4                 quantized (simulated)    0.7412   
+d5/dwsep_k5_w2_qat8                 quantized (simulated)    1.0762   
+d5/dwsep_k5_w4_dist_prune50_qat4    quantized (simulated)    1.4102   
+d5/dwsep_k5_w4_kdT4a0.5_qat4        quantized (simulated)    1.6191   
+d5/dwsep_k5_w4_kdT4a0.5_qat8        quantized (simulated)    2.4570   
+d5/dwsep_k3_w8_qat4                 quantized (simulated)    3.3164   
+d5/dwsep_k5_w8_qat4                 quantized (simulated)    3.8789   
+d5/dwsep_k5_w8_qat8                 quantized (simulated)    6.2266   
+d5/dwsep_k3_w16_qat4                quantized (simulated)    9.2891   
+d5/dwsep_k3_w16_qat8                quantized (simulated)   15.5469   
+d5/dwsep_k5_w32_labe_prune75_qat4   quantized (simulated)   18.7878   
+d5/dwsep_k5_w32_labe_prune50_qat4   quantized (simulated)   25.1634   
+d5/dwsep_k5_w32_labe_prune50_qat8   quantized (simulated)   37.9258   
+d5/single_k5_w16_dist_prune50_qat4  quantized (simulated)  103.0088   
+d5/single_k5_w16_dist_prune50_qat8  quantized (simulated)  170.5547   
+d5/single_k5_w16_dist_prune50_ptq8  quantized (simulated)  170.5566   
+
+                                    x smaller than teacher  params  sparsity  \
+d5/dwsep_k5_w2_ptq2                              1988.2878     786    0.6827   
+d5/dwsep_k5_w2_qat2                              1981.1613     786    0.6691   
+d5/dwsep_k5_w2_qat4                              1456.5059     786    0.1365   
+d5/dwsep_k5_w2_qat8                              1003.1652     786    0.0112   
+d5/dwsep_k5_w4_dist_prune50_qat4                  765.5734    1912    0.5000   
+d5/dwsep_k5_w4_kdT4a0.5_qat4                      666.7600    1912    0.1329   
+d5/dwsep_k5_w4_kdT4a0.5_qat8                      439.3831    1912    0.0078   
+d5/dwsep_k3_w8_qat4                               325.5265    4044    0.1216   
+d5/dwsep_k5_w8_qat4                               278.3202    5196    0.1367   
+d5/dwsep_k5_w8_qat8                               173.3827    5196    0.0078   
+d5/dwsep_k3_w16_qat4                              116.2204   13588    0.1657   
+d5/dwsep_k3_w16_qat8                               69.4402   13588    0.0089   
+d5/dwsep_k5_w32_labe_prune75_qat4                  57.4638   53796    0.7501   
+d5/dwsep_k5_w32_labe_prune50_qat4                  42.9032   53796    0.5002   
+d5/dwsep_k5_w32_labe_prune50_qat8                  28.4655   53796    0.5000   
+d5/single_k5_w16_dist_prune50_qat4                 10.4804  276628    0.5010   
+d5/single_k5_w16_dist_prune50_qat8                  6.3298  276628    0.5000   
+d5/single_k5_w16_dist_prune50_ptq8                  6.3297  276628    0.5000   
+
+                                    wbits  bal_acc      sd  
+d5/dwsep_k5_w2_ptq2                     2   0.2500  0.0000  
+d5/dwse
+--[5]                                         teacher       high-performance  \
+record                       c9/final (teacher)   d5/dwsep_k3_w16_qat4   
+stored kB                               1079.58                   9.29   
+x smaller than teacher                      1.0                  116.2   
+parameters                               276628                  13588   
+weight bits                                  32                      4   
+seed 1738 bal. acc                       0.9678                 0.9441   
+kind                                        NaN  quantized (simulated)   
+sparsity                                    NaN                  0.166   
+mean val bal. acc (3 seeds)                 NaN                 0.9506   
+sd                                          NaN                 0.0113   
+seed 1738 95% CI                            NaN         [0.926, 0.961]   
+recall glioma                               NaN                 0.9423   
+recall meningioma                           NaN                 0.9167   
+recall no_tumor                             NaN                 0.9271   
+recall pituitary                            NaN                 0.9904   
+tumour sensitivity                          NaN                 0.9891   
+tumour specificity                          NaN                 0.9271   
+tumour AUC                                  NaN                 0.9956   
+
+                                                         tiny  
+record                       d5/dwsep_k5_w4_dist_prune50_qat4  
+stored kB                                                1.41  
+x smaller than teacher                                  765.6  
+parameters                                               1912  
+weight bits                                                 4  
+seed 1738 bal. acc                                     0.8528  
+kind                                    quantized (simulated)  
+sparsity                                                  0.5  
+mean val bal. acc (3 seeds)                            0.8576  
+sd                                                     0.0057  
+seed 1738 95% CI                               [0.829, 0.877]  
+recall glioma                                          0.8686  
+recall meningioma                                      0.6852  
+recall no_tumor                                        0.8958  
+recall pituitary                                       0.9615  
+tumour sensitivity                                     0.9592  
+tumour specificity                                     0.8958  
+tumour AUC                                             0.9734  
+--[6] high-performance : teacher -> dwsep_k3_w16 -> dwsep_k3_w16_qat4
+tiny : teacher -> dwsep_k5_w4_kdT4a0.5 -> dwsep_k5_w4_dist_prune50 -> dwsep_k5_w4_dist_prune50_qat4
+
+--[6] image -> d6_final_6.png

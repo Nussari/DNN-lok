@@ -1,0 +1,94 @@
+--[3] CNN(
+  (features): Sequential(
+    (0): Sequential(
+      (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU(inplace=True)
+    )
+    (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (2): Block(
+      (body): Sequential(
+        (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+    )
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Block(
+      (body): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+    )
+    (5): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (6): Block(
+      (body): Sequential(
+        (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+    )
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Block(
+      (body): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+    )
+  )
+  (head): Sequential(
+    (0): AdaptiveAvgPool2d(output_size=1)
+    (1): Flatten(start_dim=1, end_dim=-1)
+    (2): Dropout(p=0.0, inplace=False)
+    (3): Linear(in_features=128, out_features=4, bias=True)
+  )
+)
+parameters: 100,244 | conv layers: 5
+
+--[5] image -> c4_initial_model_5.png
+--[5] final train loss 0.0032, train bal. acc 1.000, first epoch at 100 %: 30
+
+--[8] image -> c4_initial_model_8.png
+--[8] epoch of min val loss per seed: [54, 47, 31, 37, 52]
+epoch of max val bal. acc per seed: [52, 42, 60, 49, 56]
+epoch-to-epoch jitter of val bal. acc (std of differences, epochs 15-60): 0.1454
+s/epoch: 3.8
+
+--[11]             bal_acc_on_B                              sd                  \
+patience              5       10      20      60      5       10      20   
+rule                                                                       
+bal_acc_ma3       0.7115  0.7566  0.8838  0.8869  0.1055  0.0519  0.0250   
+val_bal_acc       0.7956  0.8191  0.8789  0.8902  0.0294  0.0336  0.0317   
+val_loss          0.7948  0.8177  0.8395  0.8758  0.0333  0.0303  0.0364   
+
+                    mean_stop_epoch                          
+patience         60              5       10      20      60  
+rule                                                         
+bal_acc_ma3  0.0194            9.75  12.580  50.315  52.360  
+val_bal_acc  0.0185            7.41  12.365  41.865  50.370  
+val_loss     0.0259            6.82  11.690  20.730  40.905  
+--[14]       bal_acc  macro_f1  tumor_auc  no_tumor_rec  best_ep  epochs    params  \
+1738    0.906     0.905      0.989         0.906     52.0    60.0  100244.0   
+1739    0.891     0.877      0.991         0.958     42.0    60.0  100244.0   
+1740    0.891     0.882      0.991         0.927     60.0    60.0  100244.0   
+1741    0.839     0.845      0.984         0.792     12.0    32.0  100244.0   
+1742    0.921     0.918      0.993         0.927     56.0    60.0  100244.0   
+
+       s/ep  
+1738  3.815  
+1739  3.800  
+1740  3.796  
+1741  3.789  
+1742  3.802  
+--[14] mean bal. acc 0.8892, sigma_seed 0.0309 -> adoption threshold 2*sigma = 0.0619
+
+--[14] seed 1738: bal. acc 0.906 [95% CI 0.883, 0.927] vs dumb baselines 0.25
+per-class recall: {'glioma': 0.9038, 'meningioma': 0.8657, 'no_tumor': 0.9062, 'pituitary': 0.9471}
+confusion (rows true, cols pred): ['glioma', 'meningioma', 'no_tumor', 'pituitary']
+[[282  26   3   1]
+ [ 18 187   5   6]
+ [  2   4  87   3]
+ [  3   7   1 197]]
+

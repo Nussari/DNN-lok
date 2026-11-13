@@ -1,0 +1,26 @@
+--[1] parameters                              2.766280e+05
+stored size (bytes, fp32, BN folded)    1.105488e+06
+torch.save(state_dict) (bytes)          1.119606e+06
+CPU latency, 1 image, 1 thread (ms)     2.711000e+00
+val balanced accuracy                   9.678000e-01
+tumour AUC                              9.981000e-01
+recall glioma                           9.710000e-01
+recall meningioma                       9.310000e-01
+recall no_tumor                         9.790000e-01
+recall pituitary                        9.900000e-01
+dtype: float64
+--[5]                layer    type            shape  weights  share
+0       features.0.0  Conv2d    (16, 1, 5, 5)      400  0.001
+1  features.2.body.0  Conv2d   (16, 16, 5, 5)     6400  0.023
+2  features.4.body.0  Conv2d   (32, 16, 5, 5)    12800  0.046
+3  features.6.body.0  Conv2d   (64, 32, 5, 5)    51200  0.185
+4  features.8.body.0  Conv2d  (128, 64, 5, 5)   204800  0.742
+5             head.3  Linear         (4, 128)      512  0.002
+--[5] image -> d1_setup_5.png
+--[9] {'teacher': {'exp': 'c9',
+  'name': 'final_s1738',
+  'bal_acc': 0.9678,
+  'bytes': 1105488},
+ 'floors': {'high-performance': 0.95, 'tiny': 0.85},
+ 'seeds': [1738, 1739, 1740],
+ 'size': 'lib.compress.size_report (BN folded, b-bit weights + fp32 per-channel scales and biases, sparse = 1-bit mask + nonzeros if smaller)'}

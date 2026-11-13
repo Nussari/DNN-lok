@@ -1,0 +1,31 @@
+--[1] clean val: 736 tumour, 96 no-tumour images
+
+--[3] image -> c10_threshold_3.png
+--[4]                     threshold sensitivity     sens 95% CI missed tumours  \
+argmax                   None     0.98913  [0.979, 0.994]              8   
+sensitivity >= 0.98  0.709731    0.986413  [0.975, 0.993]             10   
+Youden J             0.709731    0.986413  [0.975, 0.993]             10   
+cost 10:1            0.185942    0.995924  [0.988, 0.999]              3   
+
+                    specificity     spec 95% CI false alarms  
+argmax                 0.958333  [0.898, 0.984]            4  
+sensitivity >= 0.98    0.989583  [0.943, 0.998]            1  
+Youden J               0.989583  [0.943, 0.998]            1  
+cost 10:1              0.802083  [0.711, 0.869]           19  
+--[7] argmax: balanced accuracy 0.9512
+                 pred glioma  pred meningioma  pred no_tumor  pred pituitary
+true glioma              296                9              4               3
+true meningioma           11              196              4               5
+true no_tumor              2                0             92               2
+true pituitary             1                1              0             206 
+
+threshold 0.710: balanced accuracy 0.9574
+                 pred glioma  pred meningioma  pred no_tumor  pred pituitary
+true glioma              294                9              6               3
+true meningioma           11              196              4               5
+true no_tumor              1                0             95               0
+true pituitary             1                1              0             206 
+
+
+--[10] Test set not evaluated (RUN_TEST = False).
+

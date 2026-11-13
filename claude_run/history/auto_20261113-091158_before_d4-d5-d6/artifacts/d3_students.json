@@ -1,0 +1,105 @@
+{
+ "kd": {
+  "T": 4,
+  "alpha": 0.5
+ },
+ "students": [
+  {
+   "name": "dwsep_k5_w32",
+   "block": "dwsep",
+   "kernel": 5,
+   "w0": 32,
+   "method": "labels only",
+   "kd": null,
+   "run": "d2/dwsep_k5_w32",
+   "bal_acc": 0.9643,
+   "bytes": 212112
+  },
+  {
+   "name": "dwsep_k5_w8",
+   "block": "dwsep",
+   "kernel": 5,
+   "w0": 8,
+   "method": "labels only",
+   "kd": null,
+   "run": "d2/dwsep_k5_w8",
+   "bal_acc": 0.9158,
+   "bytes": 20016
+  },
+  {
+   "name": "dwsep_k5_w4",
+   "block": "dwsep",
+   "kernel": 5,
+   "w0": 4,
+   "method": "distilled",
+   "kd": {
+    "T": 4,
+    "alpha": 0.5
+   },
+   "run": "d3/dwsep_k5_w4_kdT4a0.5",
+   "bal_acc": 0.8685,
+   "bytes": 7264
+  },
+  {
+   "name": "dwsep_k5_w2",
+   "block": "dwsep",
+   "kernel": 5,
+   "w0": 2,
+   "method": "labels only",
+   "kd": null,
+   "run": "d2/dwsep_k5_w2",
+   "bal_acc": 0.7946,
+   "bytes": 2952
+  },
+  {
+   "name": "dwsep_k3_w16",
+   "block": "dwsep",
+   "kernel": 3,
+   "w0": 16,
+   "method": "labels only",
+   "kd": null,
+   "run": "d2/dwsep_k3_w16",
+   "bal_acc": 0.9484,
+   "bytes": 52816
+  },
+  {
+   "name": "dwsep_k3_w8",
+   "block": "dwsep",
+   "kernel": 3,
+   "w0": 8,
+   "method": "labels only",
+   "kd": null,
+   "run": "d2/dwsep_k3_w8",
+   "bal_acc": 0.8906,
+   "bytes": 15408
+  },
+  {
+   "name": "dwsep_k3_w4",
+   "block": "dwsep",
+   "kernel": 3,
+   "w0": 4,
+   "method": "distilled",
+   "kd": {
+    "T": 4,
+    "alpha": 0.5
+   },
+   "run": "d3/dwsep_k3_w4_kdT4a0.5",
+   "bal_acc": 0.8457,
+   "bytes": 4960
+  },
+  {
+   "name": "single_k5_w16",
+   "block": "single",
+   "kernel": 5,
+   "w0": 16,
+   "method": "distilled",
+   "kd": {
+    "T": 4,
+    "alpha": 0.5
+   },
+   "run": "d3/single_k5_w16_kdT4a0.5",
+   "bal_acc": 0.971,
+   "bytes": 1105488
+  }
+ ]
+}

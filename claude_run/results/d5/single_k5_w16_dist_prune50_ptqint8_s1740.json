@@ -1,0 +1,129 @@
+{
+ "config": {
+  "exp": "d5",
+  "name": "single_k5_w16_dist_prune50_ptqint8_s1740",
+  "mode": "gray",
+  "resize": "crop",
+  "size": 128,
+  "probe": false,
+  "normalize": "per_image",
+  "train_frac": 1.0,
+  "train_n": 0,
+  "widths": [
+   16,
+   32,
+   64,
+   128
+  ],
+  "depths": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "kernel": 5,
+  "stem_kernel": 5,
+  "block": "single",
+  "norm": true,
+  "residual": false,
+  "downsample": "avgpool",
+  "dropout": 0.0,
+  "optimizer": "adam",
+  "lr": 0.003,
+  "weight_decay": 0.0,
+  "batch_size": 64,
+  "schedule": "none",
+  "loss": "label_smoothing",
+  "sampler": "none",
+  "epochs": 30,
+  "patience": 10,
+  "monitor": "val_bal_acc",
+  "aug": "mild",
+  "seed": 1740,
+  "extra": {
+   "init": {
+    "exp": "d3",
+    "name": "single_k5_w16_kdT4a0.5_s1740"
+   },
+   "kd": {
+    "T": 4,
+    "alpha": 0.5
+   },
+   "prune": {
+    "sparsity": 0.5,
+    "ramp": 10
+   },
+   "ptq": "int8",
+   "src": {
+    "exp": "d4",
+    "name": "single_k5_w16_dist_prune50_s1740"
+   }
+  }
+ },
+ "history": [],
+ "best_epoch": 0,
+ "epochs_run": 0,
+ "val": {
+  "bal_acc": 0.97357995014245,
+  "macro_f1": 0.9741804166092048,
+  "accuracy": 0.9771634615384616,
+  "recall": {
+   "glioma": 0.9744,
+   "meningioma": 0.9769,
+   "no_tumor": 0.9479,
+   "pituitary": 0.9952
+  },
+  "precision": {
+   "glioma": 0.987,
+   "meningioma": 0.9635,
+   "no_tumor": 0.9681,
+   "pituitary": 0.981
+  },
+  "tumor_auc": 0.9983440896739131,
+  "tumor_sens": 0.9959239130434783,
+  "tumor_spec": 0.9479166666666666,
+  "confusion": [
+   [
+    304,
+    6,
+    1,
+    1
+   ],
+   [
+    3,
+    211,
+    2,
+    0
+   ],
+   [
+    1,
+    1,
+    91,
+    3
+   ],
+   [
+    0,
+    1,
+    0,
+    207
+   ]
+  ]
+ },
+ "n_params": 276628,
+ "n_conv": 0,
+ "sec_per_epoch": 0,
+ "device": "cpu",
+ "size": {
+  "bytes": 174650,
+  "wbits": 8,
+  "n_weights": 276112,
+  "nonzero": 138056,
+  "sparsity": 0.5,
+  "sparse_storage": true,
+  "serialized_bytes": 293598
+ },
+ "latency": {
+  "fp32_ms": 2.395449992036447,
+  "int8_ms": 3.268300002673641
+ }
+}

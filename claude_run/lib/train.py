@@ -79,6 +79,23 @@ def _paths(cfg):
     return d / f"{cfg.name}.json", d / f"{cfg.name}_val.npz", CKPT / cfg.exp / f"{cfg.name}.pt"
 
 
+def _supersede(cfg):
+    """Never overwrite a finished run's record: move its results to results/_superseded/<exp>/<name>__<old mtime>.*,
+    so every run ever made (config, history, scores, val probabilities) stays on disk. Weights are not kept."""
+    jpath, npath, cpath = _paths(cfg)
+    if not jpath.exists():
+        return
+    stamp = time.strftime("%Y%m%d-%H%M%S", time.localtime(jpath.stat().st_mtime))
+    epath = npath.with_name(f"{cfg.name}_epochs.npz")
+    for p in (jpath, npath, epath):
+        if p.exists():
+            suffix = p.name[len(cfg.name):]   # ".json", "_val.npz" or "_epochs.npz"
+            dest = RESULTS / "_superseded" / cfg.exp / f"{cfg.name}__{stamp}{suffix}"
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            p.rename(dest)
+    cpath.unlink(missing_ok=True)   # old weights of the replaced run are not kept
+
+
 def build_model(cfg, in_ch):
     return CNN(in_ch, len(CLASSES), cfg.widths, cfg.depths, cfg.kernel, cfg.stem_kernel, cfg.block,
                cfg.norm, cfg.residual, cfg.downsample, cfg.dropout)
@@ -142,6 +159,25 @@ def run(cfg: Config, force=False, verbose=False) -> dict:
     sample_w = (1.0 / counts)[train.y.cpu()] if cfg.sampler == "weighted" else None
 
     model = build_model(cfg, train.X.shape[1]).to(DEVICE)
+    # ---- compression hooks (lib.compress): start weights, distillation teacher, pruning, quantization
+    ex = cfg.extra
+    from . import compress as C
+    src = ex.get("init") or ex.get("slim")
+    if src:
+        sstate = torch.load(CKPT / src["exp"] / f"{src['name']}.pt", map_location=DEVICE)
+        if ex.get("init"):
+            model.load_state_dict(sstate)
+        else:   # structured pruning: most important channels of a wider trained model
+            scfg = json.loads((RESULTS / src["exp"] / f"{src['name']}.json").read_text())["config"]
+            snet = build_model(Config(**{k: tuple(v) if isinstance(v, list) else v for k, v in scfg.items()}),
+                               train.X.shape[1]).to(DEVICE)
+            snet.load_state_dict(sstate)
+            model.load_state_dict(C.slim_state(snet, model))
+    teacher = C.load_teacher(DEVICE) if ex.get("kd") else None
+    prune = ex.get("prune")
+    masks, ramp = None, (prune or {}).get("ramp", 0)
+    if ex.get("wbits"):
+        C.attach_weight_quant(model, ex["wbits"])
     opt = _optimizer(cfg, model)
     sched = None
     if cfg.schedule == "cosine":
@@ -164,15 +200,24 @@ def run(cfg: Config, force=False, verbose=False) -> dict:
     t0 = time.time()
     for ep in range(1, cfg.epochs + 1):
         model.train()
+        if prune and (masks is None or ep <= ramp):   # gradual pruning: masks recomputed while ramping, then fixed
+            masks = C.global_magnitude_masks(model, C.ramp_sparsity(prune["sparsity"], ep, ramp))
+            C.apply_masks(masks)
         tl, tc, tn = 0.0, [], []
         for x, y in train.batches(cfg.batch_size, shuffle=True, gen=gen, aug=aug, weights=sample_w, idx=idx):
             with torch.autocast(DEVICE.type, dtype=torch.float16, enabled=amp):
                 z = model(x)
                 loss = loss_fn(z.float(), y)
+                if teacher is not None:
+                    with torch.no_grad():
+                        zt = teacher(x)
+                    loss = C.kd_loss(z.float(), zt.float(), loss, ex["kd"]["T"], ex["kd"]["alpha"])
             opt.zero_grad(set_to_none=True)
             scaler.scale(loss).backward()
             scaler.step(opt)
             scaler.update()
+            if masks is not None:
+                C.apply_masks(masks)
             tl += loss.item() * len(y)
             tc.append(z.argmax(1).cpu()); tn.append(y.cpu())
         tc, tn = torch.cat(tc).numpy(), torch.cat(tn).numpy()
@@ -186,7 +231,9 @@ def run(cfg: Config, force=False, verbose=False) -> dict:
                    val_macro_f1=m["macro_f1"], val_tumor_auc=m["tumor_auc"], time=time.time() - t0)
         hist.append(row)
         score = sign * row[cfg.monitor]
-        if best is None or score < best:
+        if prune and ep < ramp:   # the model only counts once it has reached the target sparsity
+            pass
+        elif best is None or score < best:
             best, best_state, best_ep, bad = score, copy.deepcopy(model.state_dict()), ep, 0
         else:
             bad += 1
@@ -199,17 +246,25 @@ def run(cfg: Config, force=False, verbose=False) -> dict:
             break
 
     model.load_state_dict(best_state)
+    if ex.get("wbits"):
+        C.detach_weight_quant(model)          # weights now hold their quantized values
+        best_state = copy.deepcopy(model.state_dict())
     prob = predict(model, val)
     res = {"config": cfg.key(), "history": hist, "best_epoch": best_ep, "epochs_run": len(hist),
            "val": evaluate(yva, prob), "n_params": n_params(model), "n_conv": n_conv_layers(model),
-           "sec_per_epoch": (time.time() - t0) / len(hist), "device": str(DEVICE)}
+           "sec_per_epoch": (time.time() - t0) / len(hist), "device": str(DEVICE),
+           "size": C.size_report(model, ex.get("wbits", 32))}
+    _supersede(cfg)
     for p in (jpath, cpath):
         p.parent.mkdir(parents=True, exist_ok=True)
     jpath.write_text(json.dumps(res, indent=1))
     np.savez_compressed(npath, prob=prob, y=yva, paths=np.array(val.paths))
     if epoch_probs:
         np.savez_compressed(npath.with_name(f"{cfg.name}_epochs.npz"), prob=np.stack(epoch_probs), y=yva)
-    torch.save(best_state, cpath)
+    # weights only where a later step needs them: the final model (c10) and the compressed models (d-notebooks:
+    # they are pruned/quantized further, and the tiny models are the deliverable; a few kB each)
+    if cfg.exp == "c9" or cfg.exp.startswith("d"):
+        torch.save(best_state, cpath)
     del train, val, model, opt
     if DEVICE.type == "mps":
         torch.mps.empty_cache()

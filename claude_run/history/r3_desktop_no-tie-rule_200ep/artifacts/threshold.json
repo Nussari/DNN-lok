@@ -1,0 +1,1 @@
+{"rule": "tumour sensitivity >= 0.98 on clean val", "threshold": 0.709730863571167, "val_auc": 0.9972826086956522}

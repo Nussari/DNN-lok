@@ -1,0 +1,31 @@
+--[1] clean val class counts: {'glioma': np.int64(329), 'meningioma': np.int64(222), 'no_tumor': np.int64(118), 'pituitary': np.int64(223)}
+
+--[3]                      accuracy  balanced acc  macro F1  weighted F1    MCC  \
+predict largest         0.369         0.250     0.135        0.199  0.000   
+proportional random     0.278         0.251     0.251        0.278  0.001   
+uniform random          0.251         0.251     0.243        0.258  0.001   
+
+                     kappa  
+predict largest      0.000  
+proportional random  0.001  
+uniform random       0.001  
+--[5] image -> c2_eval_setup_5.png
+--[8] Wilson 95 % interval half-width, in percentage points:
+
+--[8]             glioma meningioma no_tumor pituitary
+recall 0.80   ±4.3       ±5.2     ±7.2      ±5.2
+recall 0.90   ±3.3       ±4.0     ±5.5      ±3.9
+recall 0.95   ±2.4       ±2.9     ±4.1      ±2.9
+--[9]                 bal_acc          95% CI half-width (pp)
+~0.80 correct  0.817434  [0.791, 0.844]             2.6
+~0.90 correct  0.905573  [0.883, 0.926]             2.1
+~0.95 correct  0.949124  [0.934, 0.963]             1.5
+--[12]                                 tumour prevalence  sensitivity  specificity  \
+this dataset                                0.868         0.98          0.9   
+specialist referral (assumed)               0.300         0.98          0.9   
+routine headache MRI (assumed)              0.010         0.98          0.9   
+
+                                  PPV    NPV  
+this dataset                    0.985  0.873  
+specialist referral (assumed)   0.808  0.991  
+routine headache MRI (assumed)  0.090  1.000  

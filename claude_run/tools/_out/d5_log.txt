@@ -1,0 +1,208 @@
+--[1] 14 frontier models from d4:
+
+--[1]                                    label                            run  \
+0                dwsep_k5_w4 pruned 95 %    d4/dwsep_k5_w4_dist_prune95   
+1                dwsep_k5_w4 pruned 90 %    d4/dwsep_k5_w4_dist_prune90   
+2                dwsep_k5_w4 pruned 75 %    d4/dwsep_k5_w4_dist_prune75   
+3              dwsep_k5_w2 (labels only)                 d2/dwsep_k5_w2   
+4                dwsep_k5_w4 pruned 50 %    d4/dwsep_k5_w4_dist_prune50   
+5     dwsep_k5_w4 fine-tuned, not pruned     d4/dwsep_k5_w4_dist_prune0   
+6              dwsep_k3_w8 (labels only)                 d2/dwsep_k3_w8   
+7              dwsep_k5_w8 (labels only)                 d2/dwsep_k5_w8   
+8             dwsep_k3_w16 (labels only)                d2/dwsep_k3_w16   
+9               dwsep_k5_w32 pruned 75 %   d4/dwsep_k5_w32_labe_prune75   
+10              dwsep_k5_w32 pruned 50 %   d4/dwsep_k5_w32_labe_prune50   
+11   dwsep_k5_w32 fine-tuned, not pruned    d4/dwsep_k5_w32_labe_prune0   
+12             single_k5_w16 pruned 50 %  d4/single_k5_w16_dist_prune50   
+13  single_k5_w16 fine-tuned, not pruned   d4/single_k5_w16_dist_prune0   
+
+      bytes  bal_acc  sparsity  
+0       959   0.2500    0.9499  
+1      1303   0.3477    0.8998  
+2      2331   0.5651    0.7500  
+3      2952   0.7946    0.0000  
+4      4047   0.8580    0.5000  
+5      7264   0.8828    0.0000  
+6     15408   0.8906    0.0000  
+7     20016   0.9158    0.0000  
+8     52816   0.9484    0.0000  
+9     61876   0.9598    0.7500  
+10   114132   0.9696    0.5000  
+11   212112   0.9708    0.0000  
+12   587778   0.9735    0.5000  
+13  1105488   0.9738    0.0000  
+--[3] quant                                 QAT 8-bit minus fp32 fine-tuned (pp)  \
+model                                                                        
+dwsep_k3_w16 (labels only)                                           -0.09   
+dwsep_k3_w8 (labels only)                                             0.11   
+dwsep_k5_w2 (labels only)                                            -0.16   
+dwsep_k5_w32 fine-tuned, not pruned                                   0.07   
+dwsep_k5_w32 pruned 50 %                                              0.08   
+dwsep_k5_w32 pruned 75 %                                              0.09   
+dwsep_k5_w4 fine-tuned, not pruned                                    0.24   
+dwsep_k5_w4 pruned 50 %                                               0.13   
+dwsep_k5_w4 pruned 75 %                                               0.28   
+dwsep_k5_w4 pruned 90 %                                              -0.76   
+dwsep_k5_w4 pruned 95 %                                               0.00   
+dwsep_k5_w8 (labels only)                                             0.03   
+single_k5_w16 fine-tuned, not pruned                                  0.03   
+single_k5_w16 pruned 50 %                                             0.13   
+
+quant                                 QAT 4-bit minus fp32 fine-tuned (pp)  \
+model                                                                        
+dwsep_k3_w16 (labels only)                                           -0.42   
+dwsep_k3_w8 (labels only)                                            -1.56   
+dwsep_k5_w2 (labels only)                                            -1.90   
+dwsep_k5_w32 fine-tuned, not pruned                                  -0.18   
+dwsep_k5_w32 pruned 50 %                                             -0.04   
+dwsep_k5_w32 pruned 75 %                                             -0.34   
+dwsep_k5_w4 fine-tuned, not pruned                                   -2.77   
+dwsep_k5_w4 pruned 50 %                                              -0.18   
+dwsep_k5_w4 pruned 75 %                                              15.84   
+dwsep_k5_w4 pruned 90 %                                              -0.69   
+dwsep_k5_w4 pruned 95 %                                               0.00   
+dwsep_k5_w8 (labels only)                                            -0.83   
+single_k5_w16 fine-tuned, not pruned                                  0.07   
+single_k5_w16 pruned 50 %                                             0.06   
+
+quant                                 QAT 2-bit minus fp32 fine-tuned (pp)  
+model                                                                       
+dwsep_k3_w16 (labels only)                                          -21.74  
+dwsep_k3_w8 (labels only)                                           -25.46  
+dwsep_k5_w2 (labels only)                                           -29.31  
+dwsep_k5_w32 fine-tuned, not pruned                                 -11.11  
+dwsep_k5_w32 pruned 50 %                
+--[3] quant                                   fp32 kB    fp32  fp32 fine-tuned  \
+model                                                                      
+dwsep_k5_w4 pruned 95 %                  0.9365  0.2500           0.2500   
+dwsep_k5_w4 pruned 90 %                  1.2725  0.3477           0.3650   
+dwsep_k5_w4 pruned 75 %                  2.2764  0.5651           0.5810   
+dwsep_k5_w2 (labels only)                2.8828  0.7946           0.8050   
+dwsep_k5_w4 pruned 50 %                  3.9521  0.8580           0.8594   
+dwsep_k5_w4 fine-tuned, not pruned       7.0938  0.8828           0.8828   
+dwsep_k3_w8 (labels only)               15.0469  0.8906           0.9078   
+dwsep_k5_w8 (labels only)               19.5469  0.9158           0.9327   
+dwsep_k3_w16 (labels only)              51.5781  0.9484           0.9548   
+dwsep_k5_w32 pruned 75 %                60.4258  0.9598           0.9642   
+dwsep_k5_w32 pruned 50 %               111.4570  0.9696           0.9698   
+dwsep_k5_w32 fine-tuned, not pruned    207.1406  0.9708           0.9705   
+single_k5_w16 pruned 50 %              574.0020  0.9735           0.9722   
+single_k5_w16 fine-tuned, not pruned  1079.5781  0.9738           0.9728   
+
+quant                                 PTQ 8-bit  QAT 8-bit  real int8  \
+model                                                                   
+dwsep_k5_w4 pruned 95 %                  0.2500     0.2500     0.2500   
+dwsep_k5_w4 pruned 90 %                  0.3489     0.3574     0.3269   
+dwsep_k5_w4 pruned 75 %                  0.5652     0.5838     0.5310   
+dwsep_k5_w2 (labels only)                0.7917     0.8034     0.7707   
+dwsep_k5_w4 pruned 50 %                  0.8570     0.8607     0.8534   
+dwsep_k5_w4 fine-tuned, not pruned       0.8786     0.8852     0.8786   
+dwsep_k3_w8 (labels only)                0.8882     0.9089     0.8859   
+dwsep_k5_w8 (labels only)                0.9188     0.9330     0.9083   
+dwsep_k3_w16 (labels only)               0.9486     0.9539     0.9469   
+dwsep_k5_w32 pruned 75 %                 0.9587     0.9651     0.9574   
+dwsep_k5_w32 pruned 50 %                 0.9677     0.9706     0.9685   
+dwsep_k5_w32 fine-tuned, not pruned      0.9699     0.9712     0.9694   
+single_k5_w16 pruned 50 %                0.9738     0.9735     0.9738   
+single_k5_w16 fine-tuned, not pruned     0.9746     0.9731     0.9722   
+
+quant                                 PTQ 4-bit  QAT 4-bit  PTQ 2-bit  \
+model                                                                   
+dwsep_k5_w4 pruned 95 %                  0.2500     0.2500     0.2500   
+dwsep_k5_w4 pruned 90 %                  0.3458     0.3581     0.2633   
+dwsep_k5_w4 pruned 75 %                  0.5594     0.7394     0.2946   
+dwsep_k5_w2 (labels only)                0.6147     0.7860     0.2500   
+dwsep_k5_w4 pruned 50 %                  0.6788     0.8576     0.2657   
+dwsep_k5_w4 fine-tuned, not pruned       0.5358     0.8551     0.2734   
+dwsep_k3_w8 (labels only)     
+--[4] image -> d5_quantization_4.png
+--[7]                                       simulated 8-bit PTQ  real int8  \
+model                                                                  
+dwsep_k5_w4 pruned 95 %                            0.2500     0.2500   
+dwsep_k5_w4 pruned 90 %                            0.3489     0.3269   
+dwsep_k5_w4 pruned 75 %                            0.5652     0.5310   
+dwsep_k5_w2 (labels only)                          0.7917     0.7707   
+dwsep_k5_w4 pruned 50 %                            0.8570     0.8534   
+dwsep_k5_w4 fine-tuned, not pruned                 0.8786     0.8786   
+dwsep_k3_w8 (labels only)                          0.8882     0.8859   
+dwsep_k5_w8 (labels only)                          0.9188     0.9083   
+dwsep_k3_w16 (labels only)                         0.9486     0.9469   
+dwsep_k5_w32 pruned 75 %                           0.9587     0.9574   
+dwsep_k5_w32 pruned 50 %                           0.9677     0.9685   
+dwsep_k5_w32 fine-tuned, not pruned                0.9699     0.9694   
+single_k5_w16 pruned 50 %                          0.9738     0.9738   
+single_k5_w16 fine-tuned, not pruned               0.9746     0.9722   
+
+                                      analytic 8-bit kB  torch.save int8 kB  \
+model                                                                         
+dwsep_k5_w4 pruned 95 %                          1.0752             22.5840   
+dwsep_k5_w4 pruned 90 %                          1.1592             22.5840   
+dwsep_k5_w4 pruned 75 %                          1.4102             22.5840   
+dwsep_k5_w2 (labels only)                        1.0762             20.7090   
+dwsep_k5_w4 pruned 50 %                          1.8291             22.5840   
+dwsep_k5_w4 fine-tuned, not pruned               2.4570             22.5840   
+dwsep_k3_w8 (labels only)                        5.1016             26.7090   
+dwsep_k5_w8 (labels only)                        6.2266             27.8340   
+dwsep_k3_w16 (labels only)                      15.5469             39.3965   
+dwsep_k5_w32 pruned 75 %                        25.1680             85.3965   
+dwsep_k5_w32 pruned 50 %                        37.9258             85.3965   
+dwsep_k5_w32 fine-tuned, not pruned             57.0625             85.3965   
+single_k5_w16 pruned 50 %                      170.5566            286.7168   
+single_k5_w16 fine-tuned, not pruned           271.6719            286.7168   
+
+                                      fp32 ms  int8 ms  int8 - sim (pp)  
+model                                                                    
+dwsep_k5_w4 pruned 95 %                1.1040   5.3770           0.0000  
+dwsep_k5_w4 pruned 90 %                1.0826   5.3980          -2.1954  
+dwsep_k5_w4 pruned 75 %                1.0812   5.3769          -3.4173  
+dwsep_k5_w2 (labels only)              0.9731   3.7037          -2.0967  
+dwsep_k5_w4 pruned 50 %                1.0793   5.3791          -0.3613  
+dwsep_k5_w4 fine-tuned, not pruned     1.1056   5.3854          
+--[10] QAT better than PTQ in 37 of 42 model/bit-width pairs
+
+--[10]                                                         kB  \
+dwsep_k5_w2 (labels only) | PTQ 2-bit               0.5433   
+dwsep_k5_w2 (labels only) | QAT 2-bit               0.5456   
+dwsep_k5_w2 (labels only) | QAT 4-bit               0.7412   
+dwsep_k5_w2 (labels only) | QAT 8-bit               1.0762   
+dwsep_k5_w4 pruned 50 % | QAT 4-bit                 1.4102   
+dwsep_k5_w4 pruned 50 % | QAT 8-bit                 1.8291   
+dwsep_k5_w4 fine-tuned, not pruned | QAT 8-bit      2.4570   
+dwsep_k3_w8 (labels only) | QAT 4-bit               3.3164   
+dwsep_k5_w8 (labels only) | QAT 4-bit               3.8789   
+dwsep_k5_w8 (labels only) | QAT 8-bit               6.2266   
+dwsep_k3_w16 (labels only) | QAT 4-bit              9.2891   
+dwsep_k3_w16 (labels only) | QAT 8-bit             15.5469   
+dwsep_k5_w32 pruned 75 % | QAT 4-bit               18.7878   
+dwsep_k5_w32 pruned 50 % | QAT 4-bit               25.1634   
+dwsep_k5_w32 pruned 50 % | QAT 8-bit               37.9258   
+dwsep_k5_w32 fine-tuned, not pruned | QAT 8-bit    57.0625   
+single_k5_w16 pruned 50 % | QAT 4-bit             103.0088   
+single_k5_w16 fine-tuned, not pruned | QAT 4-bit  135.9300   
+single_k5_w16 pruned 50 % | PTQ 8-bit             170.5566   
+single_k5_w16 fine-tuned, not pruned | PTQ 8-bit  271.6719   
+
+                                                  x smaller than teacher  \
+dwsep_k5_w2 (labels only) | PTQ 2-bit                          1988.2878   
+dwsep_k5_w2 (labels only) | QAT 2-bit                          1981.1613   
+dwsep_k5_w2 (labels only) | QAT 4-bit                          1456.5059   
+dwsep_k5_w2 (labels only) | QAT 8-bit                          1003.1652   
+dwsep_k5_w4 pruned 50 % | QAT 4-bit                             765.5734   
+dwsep_k5_w4 pruned 50 % | QAT 8-bit                             590.2232   
+dwsep_k5_w4 fine-tuned, not pruned | QAT 8-bit                  439.3831   
+dwsep_k3_w8 (labels only) | QAT 4-bit                           325.5265   
+dwsep_k5_w8 (labels only) | QAT 4-bit                           278.3202   
+dwsep_k5_w8 (labels only) | QAT 8-bit                           173.3827   
+dwsep_k3_w16 (labels only) | QAT 4-bit                          116.2204   
+dwsep_k3_w16 (labels only) | QAT 8-bit                           69.4402   
+dwsep_k5_w32 pruned 75 % | QAT 4-bit                             57.4638   
+dwsep_k5_w32 pruned 50 % | QAT 4-bit                             42.9032   
+dwsep_k5_w32 pruned 50 % | QAT 8-bit                             28.4655   
+dwsep_k5_w32 fine-tuned, not pruned | QAT 8-bit                  18.9192   
+single_k5_w16 pruned 50 % | QAT 4-bit                            10.4804   
+single_k5_w16 fine-tuned, not pruned | QAT 4-bit                  7.9422   
+single_k5_w16 pruned 50 % | PTQ 8-bit                             6.3297   
+single_k5_w16 fine-tuned, not pruned | PTQ 8-bit                  3.9738   
+
+                                                  sparsity  wbits  bal_acc  \
+dwsep_k5_w2 (labels on

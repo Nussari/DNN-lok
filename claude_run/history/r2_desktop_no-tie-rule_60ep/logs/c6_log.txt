@@ -1,0 +1,111 @@
+--[1] {'mode': 'gray', 'resize': 'crop', 'size': 128, 'normalize': 'per_image'} {'monitor': 'val_bal_acc', 'patience': 20, 'epochs': 60}
+
+--[3] all baseline runs were made on cuda: nothing to check
+
+--[5] image -> c6_optimisation_5.png
+--[5]         bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  \
+0.0001   0.8778  0.0181  3.0 -0.0051  0.0505    0.8706     0.9899   
+0.0003   0.8920  0.0178  3.0  0.0092  0.0505    0.8829     0.9875   
+0.001    0.8828  0.0383  3.0  0.0000  0.0505    0.8781     0.9906   
+0.003    0.9112  0.0192  3.0  0.0284  0.0505    0.8967     0.9910   
+0.01     0.9209  0.0070  3.0  0.0381  0.0505    0.9131     0.9935   
+0.03     0.9371  0.0111  3.0  0.0542  0.0505    0.9321     0.9931   
+0.1      0.9170  0.0141  3.0  0.0342  0.0505    0.9100     0.9894   
+
+        no_tumor_rec   epochs    params    s/ep  
+0.0001        0.8820  60.0000  100244.0  0.5347  
+0.0003        0.9202  48.3333  100244.0  0.5254  
+0.001         0.9028  47.0000  100244.0  0.5598  
+0.003         0.9271  45.6667  100244.0  0.5297  
+0.01          0.9271  54.6667  100244.0  0.5331  
+0.03          0.9479  55.0000  100244.0  0.5352  
+0.1           0.9236  57.6667  100244.0  0.5364  
+--[5] {'slope_per_decade': np.float64(0.0175), 'slope_ci': (np.float64(0.008182980619567902), np.float64(0.026773266099207216)), 'p_linear': np.float64(0.0009), 'p_quadratic': np.float64(0.4412), 'has_shape': True, 'best': 0.03, 'best_at_edge': False}
+
+--[5] image -> c6_optimisation_5.png
+--[5] chosen lr: 0.03
+
+--[6]         best epoch (selected)  mean of last 10 epochs  \
+0.0001                 0.8778                  0.8453   
+0.0003                 0.8920                  0.8219   
+0.001                  0.8828                  0.7386   
+0.003                  0.9112                  0.8268   
+0.01                   0.9209                  0.8495   
+0.03                   0.9371                  0.8558   
+0.1                    0.9170                  0.8025   
+
+        jitter (sd of epoch-to-epoch change)  
+0.0001                                0.0471  
+0.0003                                0.1448  
+0.001                                 0.1598  
+0.003                                 0.1555  
+0.01                                  0.1362  
+0.03                                  0.1064  
+0.1                                   0.1333  
+--[9] {'slope_per_decade': np.float64(0.0187), 'slope_ci': (np.float64(0.0038939864605683962), np.float64(0.03359211927859338)), 'p_linear': np.float64(0.0173), 'p_quadratic': np.float64(0.4317), 'has_shape': True, 'best': 0.1, 'best_at_edge': False}
+
+--[9] image -> c6_optimisation_9.png
+--[9] image -> c6_optimisation_9.png
+--[9]            bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  \
+adam 0.03   0.9371  0.0111  3.0  0.0000  0.0505    0.9321     0.9931   
+sgd 0.1     0.9284  0.0019  3.0 -0.0087  0.0505    0.9261     0.9927   
+
+           no_tumor_rec  epochs    params    s/ep  
+adam 0.03        0.9479    55.0  100244.0  0.5352  
+sgd 0.1          0.9097    60.0  100244.0  0.5383  
+--[9] chosen optimiser: adam 0.03
+
+--[12] image -> c6_optimisation_12.png
+--[12]      bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  no_tumor_rec  \
+32    0.9305  0.0130  3.0 -0.0065  0.0505    0.9240     0.9937        0.9306   
+64    0.9371  0.0111  3.0  0.0000  0.0505    0.9321     0.9931        0.9479   
+128   0.9223  0.0269  3.0 -0.0148  0.0505    0.9129     0.9924        0.9375   
+
+      epochs    params    s/ep  
+32   58.0000  100244.0  0.6527  
+64   55.0000  100244.0  0.5352  
+128  50.6667  100244.0  0.5209  
+--[12] {'slope_per_decade': np.float64(-0.0137), 'slope_ci': (np.float64(-0.07124655568284119), np.float64(0.0438891528358785)), 'p_linear': np.float64(0.5917), 'p_quadratic': np.float64(0.4439), 'has_shape': False, 'best': 64, 'best_at_edge': False}
+chosen batch size: 64
+
+--[15] image -> c6_optimisation_15.png
+--[15]          bal_acc      sd    n   delta  needed  macro_f1  tumor_auc  \
+none      0.9371  0.0111  3.0  0.0000  0.0505    0.9321     0.9931   
+cosine    0.9371  0.0051  3.0  0.0000  0.0505    0.9325     0.9942   
+step      0.9324  0.0048  3.0 -0.0046  0.0505    0.9325     0.9935   
+plateau   0.9263  0.0033  3.0 -0.0108  0.0505    0.9247     0.9929   
+
+         no_tumor_rec   epochs    params    s/ep  
+none           0.9479  55.0000  100244.0  0.5352  
+cosine         0.9444  56.6667  100244.0  0.5424  
+step           0.9236  55.3333  100244.0  0.5424  
+plateau        0.9063  50.6667  100244.0  0.5432  
+--[15] image -> c6_optimisation_15.png
+--[15] chosen schedule: none
+
+--[18] image -> c6_optimisation_18.png
+--[18]                        bal_acc      sd    n   delta  needed  macro_f1  \
+ce                      0.9371  0.0111  3.0  0.0000  0.0505    0.9321   
+weighted ce             0.9344  0.0042  3.0 -0.0027  0.0505    0.9249   
+ce + weighted sampler   0.9287  0.0145  3.0 -0.0083  0.0505    0.9203   
+label smoothing         0.9373  0.0088  3.0  0.0003  0.0505    0.9303   
+focal                   0.9313  0.0223  3.0 -0.0058  0.0505    0.9264   
+
+                       tumor_auc  no_tumor_rec   epochs    params    s/ep  
+ce                        0.9931        0.9479  55.0000  100244.0  0.5352  
+weighted ce               0.9938        0.9549  54.6667  100244.0  0.5438  
+ce + weighted sampler     0.9901        0.9444  59.6667  100244.0  0.5438  
+label smoothing           0.9957        0.9548  57.0000  100244.0  0.5537  
+focal                     0.9949        0.9236  51.0000  100244.0  0.5520  
+--[18] mean per-class recall:
+
+--[18]                        glioma  meningioma  no_tumor  pituitary
+ce                      0.941       0.872     0.948      0.987
+weighted ce             0.917       0.898     0.955      0.968
+ce + weighted sampler   0.889       0.914     0.944      0.968
+label smoothing         0.904       0.928     0.955      0.963
+focal                   0.910       0.910     0.924      0.981
+--[18] chosen: label smoothing
+
+--[22] {'optimizer': 'adam', 'lr': 0.03, 'batch_size': 64, 'schedule': 'none', 'loss': 'label_smoothing', 'sampler': 'none'} -> mean val bal. acc 0.9373
+

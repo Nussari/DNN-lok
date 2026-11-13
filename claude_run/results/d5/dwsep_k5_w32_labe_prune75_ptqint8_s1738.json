@@ -1,0 +1,125 @@
+{
+ "config": {
+  "exp": "d5",
+  "name": "dwsep_k5_w32_labe_prune75_ptqint8_s1738",
+  "mode": "gray",
+  "resize": "crop",
+  "size": 128,
+  "probe": false,
+  "normalize": "per_image",
+  "train_frac": 1.0,
+  "train_n": 0,
+  "widths": [
+   32,
+   64,
+   128,
+   256
+  ],
+  "depths": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "kernel": 5,
+  "stem_kernel": 5,
+  "block": "dwsep",
+  "norm": true,
+  "residual": false,
+  "downsample": "avgpool",
+  "dropout": 0.0,
+  "optimizer": "adam",
+  "lr": 0.003,
+  "weight_decay": 0.0,
+  "batch_size": 64,
+  "schedule": "none",
+  "loss": "label_smoothing",
+  "sampler": "none",
+  "epochs": 30,
+  "patience": 10,
+  "monitor": "val_bal_acc",
+  "aug": "mild",
+  "seed": 1738,
+  "extra": {
+   "init": {
+    "exp": "d2",
+    "name": "dwsep_k5_w32_s1738"
+   },
+   "prune": {
+    "sparsity": 0.75,
+    "ramp": 10
+   },
+   "ptq": "int8",
+   "src": {
+    "exp": "d4",
+    "name": "dwsep_k5_w32_labe_prune75_s1738"
+   }
+  }
+ },
+ "history": [],
+ "best_epoch": 0,
+ "epochs_run": 0,
+ "val": {
+  "bal_acc": 0.9617165242165242,
+  "macro_f1": 0.9570657533237248,
+  "accuracy": 0.9603365384615384,
+  "recall": {
+   "glioma": 0.9487,
+   "meningioma": 0.9398,
+   "no_tumor": 0.9583,
+   "pituitary": 1.0
+  },
+  "precision": {
+   "glioma": 0.9801,
+   "meningioma": 0.9486,
+   "no_tumor": 0.92,
+   "pituitary": 0.963
+  },
+  "tumor_auc": 0.9943104619565217,
+  "tumor_sens": 0.9891304347826086,
+  "tumor_spec": 0.9583333333333334,
+  "confusion": [
+   [
+    296,
+    10,
+    2,
+    4
+   ],
+   [
+    4,
+    203,
+    6,
+    3
+   ],
+   [
+    2,
+    1,
+    92,
+    1
+   ],
+   [
+    0,
+    0,
+    0,
+    208
+   ]
+  ]
+ },
+ "n_params": 53796,
+ "n_conv": 0,
+ "sec_per_epoch": 0,
+ "device": "cpu",
+ "size": {
+  "bytes": 25772,
+  "wbits": 8,
+  "n_weights": 52256,
+  "nonzero": 13064,
+  "sparsity": 0.75,
+  "sparse_storage": true,
+  "serialized_bytes": 87446
+ },
+ "latency": {
+  "fp32_ms": 2.678749995538965,
+  "int8_ms": 4.689900000812486
+ }
+}

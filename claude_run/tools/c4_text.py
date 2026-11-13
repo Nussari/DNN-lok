@@ -47,15 +47,19 @@ larger than 2·σ·√(1/3 + 1/3) = **0.050**, i.e. about 5 pp of balanced accur
 changes will be "ties", and the rule then keeps the simpler or default option. This is deliberate: on 832 val
 images and with this much seed noise, smaller differences cannot be told apart from luck without many more
 seeds than this machine can afford.
+
+**Update (round r2).** σ_seed was measured on this untuned model (lr 1e-3, jumpy val curve). The tuned models of
+c6 to c8 have a seed sd of 0.004 to 0.009, so 5 pp was far too high a bar: in round r1 it rejected every change.
+From round r2 the option with the highest mean wins (see c2). σ_seed is kept as the reported noise reference.
 """
 T["summary"] = """
 | Decision | Choice | Evidence |
 |---|---|---|
 | Sanity check | passed | memorises 64 images to 100 % (section 1) |
 | Early-stopping monitor | val balanced accuracy | beats val loss at every patience on unseen half B (section 4) |
-| Patience / epoch cap | 20 / 60 | patience 5-10 stops in the jumpy phase; 20 gets within 1 pp of "train 60, keep best" |
+| Patience / epoch cap | 20 / 60 | patience 5-10 stops in the jumpy phase; 20 gets within 1 pp of "train 60, keep best". Round r3 raised the cap to 200 from c5 on: no gain (history notebook), so 60 stays |
 | Noise level | σ_seed = 0.031 | 5 seeds (section 5) |
-| Adoption rule | Δ > 2·σ·√(1/n_a + 1/n_b) (0.050 for 3 vs 3) | from c2, completed with σ_seed |
+| Adoption rule | Δ > 2·σ·√(1/n_a + 1/n_b) (0.050 for 3 vs 3) | from c2, completed with σ_seed. Rounds r0, r1 only; from r2 the highest mean wins |
 | Starting point | 0.896 (mean of seeds 1738-1740) | the baseline every later step must beat |
 
 Open issues carried forward: constant LR 1e-3 is a likely cause of the jumpy val curve (c6), and

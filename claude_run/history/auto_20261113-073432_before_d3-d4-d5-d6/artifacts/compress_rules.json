@@ -1,0 +1,18 @@
+{
+ "teacher": {
+  "exp": "c9",
+  "name": "final_s1738",
+  "bal_acc": 0.9678,
+  "bytes": 1105488
+ },
+ "floors": {
+  "high-performance": 0.95,
+  "tiny": 0.85
+ },
+ "seeds": [
+  1738,
+  1739,
+  1740
+ ],
+ "size": "lib.compress.size_report (BN folded, b-bit weights + fp32 per-channel scales and biases, sparse = 1-bit mask + nonzeros if smaller)"
+}

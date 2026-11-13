@@ -5,8 +5,8 @@ import torch
 from torch import nn
 
 
-def conv_bn_act(cin, cout, k, stride=1, norm=True, act=True):
-    layers = [nn.Conv2d(cin, cout, k, stride=stride, padding=k // 2, bias=not norm)]
+def conv_bn_act(cin, cout, k, stride=1, norm=True, act=True, groups=1):
+    layers = [nn.Conv2d(cin, cout, k, stride=stride, padding=k // 2, bias=not norm, groups=groups)]
     if norm:
         layers.append(nn.BatchNorm2d(cout))
     if act:
@@ -15,13 +15,18 @@ def conv_bn_act(cin, cout, k, stride=1, norm=True, act=True):
 
 
 class Block(nn.Module):
-    """'single': one conv.  'basic': two convs (ResNet basic block), optionally with a skip connection."""
+    """'single': one conv.  'basic': two convs (ResNet basic block), optionally with a skip connection.
+    'dwsep': depthwise-separable conv (k x k depthwise per channel, then 1x1 pointwise), as in MobileNet:
+    k*k*cin + cin*cout weights instead of k*k*cin*cout."""
 
     def __init__(self, cin, cout, k, stride, kind, norm, residual):
         super().__init__()
         self.residual = residual and kind == "basic"
         if kind == "single":
             self.body = conv_bn_act(cin, cout, k, stride, norm)
+        elif kind == "dwsep":
+            self.body = nn.Sequential(conv_bn_act(cin, cin, k, stride, norm, groups=cin),
+                                      conv_bn_act(cin, cout, 1, 1, norm))
         else:
             self.body = nn.Sequential(conv_bn_act(cin, cout, k, stride, norm),
                                       conv_bn_act(cout, cout, k, 1, norm, act=not self.residual))

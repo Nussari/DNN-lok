@@ -1,0 +1,1 @@
+﻿r2_final_s1738.pt: final model of round r2 (no tie rule, 60-epoch cap). Val balanced accuracy 0.968 [95% CI 0.955, 0.979]. Config: claude_run/history/r2_desktop_no-tie-rule_60ep/results/c9/final_s1738.json

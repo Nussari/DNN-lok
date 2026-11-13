@@ -1,5 +1,9 @@
 {
  "c4 initial": 0.8956255935422602,
- "c5 input": 0.8956255935422602,
- "c6 optimisation": 0.8956255935422602
+ "c5 input": 0.8828495963912631,
+ "c6 optimisation": 0.93732935660019,
+ "c7 small arch": 0.9588007478632479,
+ "c7 deep arch": 0.9622655508072175,
+ "c8 regularised small": 0.9744480056980057,
+ "c8 regularised deep": 0.966735665954416
 }

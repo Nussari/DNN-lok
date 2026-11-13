@@ -30,7 +30,7 @@ from lib.train import Config, run, build_model
 from lib.models import n_params, n_conv_layers
 from lib.report import run_seeds, compare, pick, log_progress
 from lib.data import ARTIFACTS
-proto = json.loads((ARTIFACTS / "protocol.json").read_text())
+from lib.report import protocol; proto = protocol()   # c4 protocol with the raised epoch cap
 INPUT = json.loads((ARTIFACTS / "input.json").read_text())
 OPTIM = json.loads((ARTIFACTS / "optim.json").read_text())
 CUR = replace(Config(exp="c7", name="x", monitor=proto["monitor"], patience=proto["patience"], epochs=proto["epochs"]), **INPUT, **OPTIM)
@@ -121,7 +121,7 @@ nb.md("## 4. Width (on the deep candidate)")
 nb.code("""
 W = {16: (16, 32, 64, 128), 32: (32, 64, 128, 256), 64: (64, 128, 256, 512)}
 wid = {"16": arch[DEEP_KEY]}
-for w in [32]:  # 64 is too slow on the M1; it goes into the desktop scale-up notebook
+for w in [32, 64]:
     wid[str(w)] = run_seeds(replace(DEEP, name=f"{tag}_{DEEP_KEY.replace(' ', '')}_w{w}", widths=W[w]))
 t_w = compare(wid, "16", f"width of {DEEP_KEY}"); display(t_w)
 WBEST = int(pick(t_w, "16")); DEEP = replace(DEEP, widths=W[WBEST]); print("chosen width:", WBEST)
