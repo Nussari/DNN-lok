@@ -5,7 +5,12 @@ pretrained weights) to classify brain MRI slices into four classes: **glioma, me
 tumour**. The model is then compressed with distillation, pruning and quantization into models of a few kilobytes.
 
 * **Dataset:** BDNeuro-MRI v7 (Mendeley Data, DOI 10.17632/zwr4ntf94j.7), official split: 4,160 train /
-  892 val / 889 test images.
+  892 val / 889 test images. Licence: **CC BY 4.0**, as stated on the Mendeley Data page (the README inside the
+  downloaded archive still has a placeholder licence line; the Mendeley page is the published one). The data is
+  not in this repository; `tools/get_data.py` downloads it.
+* **Citation:** Hira, M. I. K., Hossain, M. S., Bithee, M. A., Sara, U. S., Hasan, M. M., Towsif, A. A. &
+  Ahmed, M. K. (2026). *BDNeuro-MRI: A Bangladeshi Clinical Brain Tumor MRI Dataset for Four-Class Deep Learning
+  Classification* (Version 7). Mendeley Data. https://doi.org/10.17632/zwr4ntf94j.7
 * **Metric:** balanced accuracy (the mean of the four per-class recalls). Every choice was made on **clean val**
   (832 images: val without near-copies of training images). The test set was used once, at the end.
 * **Seeds:** every option was trained with seeds 1738, 1739 and 1740 (the deep candidates in c8 and c9 with the
@@ -45,6 +50,7 @@ notebooks/         the pipeline, one notebook per step
                      c1-c10            the classifier
                      d1-d6             compression
                      test_evaluation   the single test evaluation of the four final models
+                     error_analysis    which images the four models get wrong, and whether they share errors
                      history_all_rounds  every configuration of every round, side by side
 lib/               code used by the notebooks: data, models, training, evaluation, compression
 tools/             notebook generators (make_<step>.py = code, <step>_text.py = written conclusions, nbtools.py),
@@ -83,6 +89,7 @@ data/, cache/      not tracked: the dataset (tools/get_data.py) and preprocessed
 | d5_quantization | 8/4/2-bit, post-training vs quantization-aware, real int8 | 4-bit quantization-aware training is the best trade-off; 2-bit collapses |
 | d6_final | size / accuracy frontier and the final picks | smallest models with val ≥ 0.95 (9.3 kB) and ≥ 0.85 (1.4 kB); a third with a 1 pp margin (18.8 kB, ≥ 0.96) because the 0.95 pick was borderline |
 | test_evaluation | the four final models on the test set | see Results |
+| error_analysis | do the models fail on the same images; what do the failures look like | errors are shared far more than chance, but 11 of 19 missed tumours are missed by one model only; both missed tumours and false alarms are scans that look unlike the bulk of the data (scan type, contrast, framing, borders) |
 
 3. **`history/README.md`** explains the four rounds the pipeline went through (selection rule, epoch cap), the
    decisions that were revised and why, and what did not work. `notebooks/history_all_rounds.ipynb` shows every
@@ -119,7 +126,7 @@ The same code loads the compressed models from the files listed in MODELS.md.
 
 ### 3. Rebuild the notebooks from the stored runs (minutes)
 ```
-python tools/run_chain.py 1 2 3 4 5 6 7 8 9 d1 d2 d3 d4 d5 d6 10 test
+python tools/run_chain.py 1 2 3 4 5 6 7 8 9 d1 d2 d3 d4 d5 d6 10 test errors
 python tools/make_history.py
 ```
 Every training run is stored by its configuration in `results/`, so this regenerates and re-executes every
@@ -130,7 +137,7 @@ after d6 because it applies the decision rule to the compressed models picked th
 Move the stored runs, weights and decisions aside, then run the chain:
 ```
 mkdir ../stored_runs && mv results checkpoints artifacts ../stored_runs/ && mkdir results checkpoints artifacts
-python tools/run_chain.py 1 2 3 4 5 6 7 8 9 d1 d2 d3 d4 d5 d6 10 test
+python tools/run_chain.py 1 2 3 4 5 6 7 8 9 d1 d2 d3 d4 d5 d6 10 test errors
 ```
 Each step reads the decisions of the previous steps from `artifacts/`, so the steps must run in order. The
 compressed models evaluated by c10 and `test` are the ones d6 picks (`artifacts/compress_final.json`). Expect

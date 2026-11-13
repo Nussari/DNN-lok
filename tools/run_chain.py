@@ -1,7 +1,7 @@
 """Build and execute the pipeline notebooks in order. Finished training runs are cached in results/, so a notebook
 that already ran is re-rendered in seconds and an interrupted chain continues where it stopped.
 
-    python tools/run_chain.py 1 2 3 4 5 6 7 8 9 d1 d2 d3 d4 d5 d6 10 test
+    python tools/run_chain.py 1 2 3 4 5 6 7 8 9 d1 d2 d3 d4 d5 d6 10 test errors
 
 c10 applies the tumour decision rule to the compressed models picked in d6, so it runs after d6.
     python tools/run_chain.py 7 8        # only c7 and c8
@@ -12,8 +12,9 @@ import subprocess, sys, time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-# "6" -> c6 (classifier notebooks), "d3" -> d3 (compression notebooks), "test" -> the test evaluation
-steps = [a if a.startswith("d") or a == "test" else f"c{a}" for a in sys.argv[1:]]
+# "6" -> c6 (classifier notebooks), "d3" -> d3 (compression notebooks), "test" / "errors" -> the test evaluation
+# and the error analysis
+steps = [a if a.startswith("d") or a in ("test", "errors") else f"c{a}" for a in sys.argv[1:]]
 if not steps:
     sys.exit(__doc__)
 
