@@ -1,0 +1,125 @@
+{
+ "config": {
+  "exp": "d5",
+  "name": "dwsep_k5_w4_dist_prune50_ptq2_s1738",
+  "mode": "gray",
+  "resize": "crop",
+  "size": 128,
+  "probe": false,
+  "normalize": "per_image",
+  "train_frac": 1.0,
+  "train_n": 0,
+  "widths": [
+   4,
+   8,
+   16,
+   32
+  ],
+  "depths": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "kernel": 5,
+  "stem_kernel": 5,
+  "block": "dwsep",
+  "norm": true,
+  "residual": false,
+  "downsample": "avgpool",
+  "dropout": 0.0,
+  "optimizer": "adam",
+  "lr": 0.003,
+  "weight_decay": 0.0,
+  "batch_size": 64,
+  "schedule": "none",
+  "loss": "label_smoothing",
+  "sampler": "none",
+  "epochs": 30,
+  "patience": 10,
+  "monitor": "val_bal_acc",
+  "aug": "mild",
+  "seed": 1738,
+  "extra": {
+   "init": {
+    "exp": "d3",
+    "name": "dwsep_k5_w4_kdT4a0.5_s1738"
+   },
+   "kd": {
+    "T": 4,
+    "alpha": 0.5
+   },
+   "prune": {
+    "sparsity": 0.5,
+    "ramp": 10
+   },
+   "ptq": 2,
+   "src": {
+    "exp": "d4",
+    "name": "dwsep_k5_w4_dist_prune50_s1738"
+   }
+  }
+ },
+ "history": [],
+ "best_epoch": 0,
+ "epochs_run": 0,
+ "val": {
+  "bal_acc": 0.2556089743589744,
+  "macro_f1": 0.16297751500939645,
+  "accuracy": 0.3737980769230769,
+  "recall": {
+   "glioma": 0.9679,
+   "meningioma": 0.0,
+   "no_tumor": 0.0208,
+   "pituitary": 0.0337
+  },
+  "precision": {
+   "glioma": 0.3932,
+   "meningioma": 0.0,
+   "no_tumor": 0.3333,
+   "pituitary": 0.1296
+  },
+  "tumor_auc": 0.7849298007246377,
+  "tumor_sens": 0.9945652173913043,
+  "tumor_spec": 0.020833333333333332,
+  "confusion": [
+   [
+    302,
+    2,
+    0,
+    8
+   ],
+   [
+    204,
+    0,
+    1,
+    11
+   ],
+   [
+    65,
+    1,
+    2,
+    28
+   ],
+   [
+    197,
+    1,
+    3,
+    7
+   ]
+  ]
+ },
+ "n_params": 1912,
+ "n_conv": 0,
+ "sec_per_epoch": 0,
+ "device": "cuda",
+ "size": {
+  "bytes": 1137,
+  "wbits": 2,
+  "n_weights": 1716,
+  "nonzero": 489,
+  "sparsity": 0.715034965034965,
+  "sparse_storage": true
+ },
+ "latency": {}
+}

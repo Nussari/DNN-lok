@@ -1,0 +1,14 @@
+# Tested with: Python 3.12 + torch 2.6.0+cu124 (RTX 2080 Ti, CUDA) and Python 3.14 + torch 2.13 (Apple M1, MPS).
+# For CUDA, install torch from the PyTorch index first, e.g.
+#   pip install torch --index-url https://download.pytorch.org/whl/cu124
+torch>=2.6
+numpy
+scipy
+pandas
+scikit-learn
+matplotlib
+pillow
+nbformat
+nbconvert
+jupyter
+ipykernel

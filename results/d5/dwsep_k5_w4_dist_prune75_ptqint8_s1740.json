@@ -1,0 +1,129 @@
+{
+ "config": {
+  "exp": "d5",
+  "name": "dwsep_k5_w4_dist_prune75_ptqint8_s1740",
+  "mode": "gray",
+  "resize": "crop",
+  "size": 128,
+  "probe": false,
+  "normalize": "per_image",
+  "train_frac": 1.0,
+  "train_n": 0,
+  "widths": [
+   4,
+   8,
+   16,
+   32
+  ],
+  "depths": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "kernel": 5,
+  "stem_kernel": 5,
+  "block": "dwsep",
+  "norm": true,
+  "residual": false,
+  "downsample": "avgpool",
+  "dropout": 0.0,
+  "optimizer": "adam",
+  "lr": 0.003,
+  "weight_decay": 0.0,
+  "batch_size": 64,
+  "schedule": "none",
+  "loss": "label_smoothing",
+  "sampler": "none",
+  "epochs": 30,
+  "patience": 10,
+  "monitor": "val_bal_acc",
+  "aug": "mild",
+  "seed": 1740,
+  "extra": {
+   "init": {
+    "exp": "d3",
+    "name": "dwsep_k5_w4_kdT4a0.5_s1740"
+   },
+   "kd": {
+    "T": 4,
+    "alpha": 0.5
+   },
+   "prune": {
+    "sparsity": 0.75,
+    "ramp": 10
+   },
+   "ptq": "int8",
+   "src": {
+    "exp": "d4",
+    "name": "dwsep_k5_w4_dist_prune75_s1740"
+   }
+  }
+ },
+ "history": [],
+ "best_epoch": 0,
+ "epochs_run": 0,
+ "val": {
+  "bal_acc": 0.6797320156695157,
+  "macro_f1": 0.6742252242098877,
+  "accuracy": 0.7043269230769231,
+  "recall": {
+   "glioma": 0.9038,
+   "meningioma": 0.287,
+   "no_tumor": 0.6771,
+   "pituitary": 0.851
+  },
+  "precision": {
+   "glioma": 0.6395,
+   "meningioma": 0.8493,
+   "no_tumor": 0.7558,
+   "pituitary": 0.7629
+  },
+  "tumor_auc": 0.9155910326086956,
+  "tumor_sens": 0.9714673913043478,
+  "tumor_spec": 0.6770833333333334,
+  "confusion": [
+   [
+    282,
+    5,
+    12,
+    13
+   ],
+   [
+    117,
+    62,
+    6,
+    31
+   ],
+   [
+    19,
+    1,
+    65,
+    11
+   ],
+   [
+    23,
+    5,
+    3,
+    177
+   ]
+  ]
+ },
+ "n_params": 1912,
+ "n_conv": 0,
+ "sec_per_epoch": 0,
+ "device": "cpu",
+ "size": {
+  "bytes": 1444,
+  "wbits": 8,
+  "n_weights": 1716,
+  "nonzero": 429,
+  "sparsity": 0.75,
+  "sparse_storage": true,
+  "serialized_bytes": 23126
+ },
+ "latency": {
+  "fp32_ms": 1.085699987015687,
+  "int8_ms": 5.389700003433973
+ }
+}

@@ -1,0 +1,274 @@
+{
+ "config": {
+  "exp": "d5",
+  "name": "dwsep_k5_w4_dist_prune50_ft32_s1740",
+  "mode": "gray",
+  "resize": "crop",
+  "size": 128,
+  "probe": false,
+  "normalize": "per_image",
+  "train_frac": 1.0,
+  "train_n": 0,
+  "widths": [
+   4,
+   8,
+   16,
+   32
+  ],
+  "depths": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "kernel": 5,
+  "stem_kernel": 5,
+  "block": "dwsep",
+  "norm": true,
+  "residual": false,
+  "downsample": "avgpool",
+  "dropout": 0.0,
+  "optimizer": "adam",
+  "lr": 0.003,
+  "weight_decay": 0.0,
+  "batch_size": 64,
+  "schedule": "none",
+  "loss": "label_smoothing",
+  "sampler": "none",
+  "epochs": 20,
+  "patience": 10,
+  "monitor": "val_bal_acc",
+  "aug": "mild",
+  "seed": 1740,
+  "extra": {
+   "kd": {
+    "T": 4,
+    "alpha": 0.5
+   },
+   "prune": {
+    "sparsity": 0.5,
+    "ramp": 0
+   },
+   "init": {
+    "exp": "d4",
+    "name": "dwsep_k5_w4_dist_prune50_s1740"
+   }
+  }
+ },
+ "history": [
+  {
+   "epoch": 1,
+   "lr": 0.003,
+   "train_loss": 0.5545854554726527,
+   "train_bal_acc": 0.8696570860850368,
+   "val_loss": 0.4604422450065613,
+   "val_bal_acc": 0.855190527065527,
+   "val_macro_f1": 0.8459101446746378,
+   "val_tumor_auc": 0.9759822237318841,
+   "time": 0.6274721622467041
+  },
+  {
+   "epoch": 2,
+   "lr": 0.003,
+   "train_loss": 0.5531823974389296,
+   "train_bal_acc": 0.865871136031289,
+   "val_loss": 0.42906495928764343,
+   "val_bal_acc": 0.8591746794871795,
+   "val_macro_f1": 0.855066560214008,
+   "val_tumor_auc": 0.9769729393115941,
+   "time": 1.2758421897888184
+  },
+  {
+   "epoch": 3,
+   "lr": 0.003,
+   "train_loss": 0.5539705487398001,
+   "train_bal_acc": 0.8688529051423876,
+   "val_loss": 0.43444401025772095,
+   "val_bal_acc": 0.8531428062678064,
+   "val_macro_f1": 0.852073246029976,
+   "val_tumor_auc": 0.9751471920289855,
+   "time": 1.8912944793701172
+  },
+  {
+   "epoch": 4,
+   "lr": 0.003,
+   "train_loss": 0.5600476049459897,
+   "train_bal_acc": 0.8665993071649633,
+   "val_loss": 0.43656355142593384,
+   "val_bal_acc": 0.8702145655270656,
+   "val_macro_f1": 0.8661017768039354,
+   "val_tumor_auc": 0.9769870923913042,
+   "time": 2.5078928470611572
+  },
+  {
+   "epoch": 5,
+   "lr": 0.003,
+   "train_loss": 0.5483813350017254,
+   "train_bal_acc": 0.8754740678663961,
+   "val_loss": 0.43796631693840027,
+   "val_bal_acc": 0.8681668447293448,
+   "val_macro_f1": 0.8622485629048273,
+   "val_tumor_auc": 0.9763926630434783,
+   "time": 3.124497413635254
+  },
+  {
+   "epoch": 6,
+   "lr": 0.003,
+   "train_loss": 0.5479873950664814,
+   "train_bal_acc": 0.8760002749831654,
+   "val_loss": 0.4446229636669159,
+   "val_bal_acc": 0.8571047008547008,
+   "val_macro_f1": 0.8514845826951809,
+   "val_tumor_auc": 0.9756567028985508,
+   "time": 3.740544557571411
+  },
+  {
+   "epoch": 7,
+   "lr": 0.003,
+   "train_loss": 0.5489740715577052,
+   "train_bal_acc": 0.8647737036065786,
+   "val_loss": 0.4273832142353058,
+   "val_bal_acc": 0.8677662037037037,
+   "val_macro_f1": 0.8628199541871663,
+   "val_tumor_auc": 0.9752462635869565,
+   "time": 4.342069387435913
+  },
+  {
+   "epoch": 8,
+   "lr": 0.003,
+   "train_loss": 0.5518106497251071,
+   "train_bal_acc": 0.8675862127120524,
+   "val_loss": 0.4365553557872772,
+   "val_bal_acc": 0.8619123931623932,
+   "val_macro_f1": 0.8589482949564775,
+   "val_tumor_auc": 0.9755151721014492,
+   "time": 4.960569381713867
+  },
+  {
+   "epoch": 9,
+   "lr": 0.003,
+   "train_loss": 0.5556214204201332,
+   "train_bal_acc": 0.8652789187304378,
+   "val_loss": 0.4386821389198303,
+   "val_bal_acc": 0.8647836538461539,
+   "val_macro_f1": 0.8587991599729252,
+   "val_tumor_auc": 0.976180366847826,
+   "time": 5.583118200302124
+  },
+  {
+   "epoch": 10,
+   "lr": 0.003,
+   "train_loss": 0.5485706480649801,
+   "train_bal_acc": 0.8771363988486555,
+   "val_loss": 0.4363625645637512,
+   "val_bal_acc": 0.8633368945868947,
+   "val_macro_f1": 0.8592772462763594,
+   "val_tumor_auc": 0.9765483469202898,
+   "time": 6.200823545455933
+  },
+  {
+   "epoch": 11,
+   "lr": 0.003,
+   "train_loss": 0.5554362567571494,
+   "train_bal_acc": 0.8712530368058954,
+   "val_loss": 0.43685129284858704,
+   "val_bal_acc": 0.8629362535612536,
+   "val_macro_f1": 0.8582068580846115,
+   "val_tumor_auc": 0.9753170289855072,
+   "time": 6.818052530288696
+  },
+  {
+   "epoch": 12,
+   "lr": 0.003,
+   "train_loss": 0.5569848601634686,
+   "train_bal_acc": 0.8593546449973165,
+   "val_loss": 0.42273280024528503,
+   "val_bal_acc": 0.8679442663817664,
+   "val_macro_f1": 0.8637701163939479,
+   "val_tumor_auc": 0.9777513586956521,
+   "time": 7.428884506225586
+  },
+  {
+   "epoch": 13,
+   "lr": 0.003,
+   "train_loss": 0.5409209063419929,
+   "train_bal_acc": 0.8734008514324576,
+   "val_loss": 0.42800432443618774,
+   "val_bal_acc": 0.8640268874643875,
+   "val_macro_f1": 0.85871470254766,
+   "val_tumor_auc": 0.9782750226449275,
+   "time": 8.06000804901123
+  },
+  {
+   "epoch": 14,
+   "lr": 0.003,
+   "train_loss": 0.5524644264808067,
+   "train_bal_acc": 0.8761096311519097,
+   "val_loss": 0.43429654836654663,
+   "val_bal_acc": 0.859775641025641,
+   "val_macro_f1": 0.8558075333761624,
+   "val_tumor_auc": 0.9774258378623188,
+   "time": 8.6807279586792
+  }
+ ],
+ "best_epoch": 4,
+ "epochs_run": 14,
+ "val": {
+  "bal_acc": 0.8702145655270656,
+  "macro_f1": 0.8661017768039354,
+  "accuracy": 0.8713942307692307,
+  "recall": {
+   "glioma": 0.8558,
+   "meningioma": 0.8102,
+   "no_tumor": 0.8438,
+   "pituitary": 0.9712
+  },
+  "precision": {
+   "glioma": 0.9207,
+   "meningioma": 0.8706,
+   "no_tumor": 0.8526,
+   "pituitary": 0.8211
+  },
+  "tumor_auc": 0.9769870923913042,
+  "tumor_sens": 0.9809782608695652,
+  "tumor_spec": 0.84375,
+  "confusion": [
+   [
+    267,
+    23,
+    7,
+    15
+   ],
+   [
+    13,
+    175,
+    6,
+    22
+   ],
+   [
+    7,
+    1,
+    81,
+    7
+   ],
+   [
+    3,
+    2,
+    1,
+    202
+   ]
+  ]
+ },
+ "n_params": 1912,
+ "n_conv": 5,
+ "sec_per_epoch": 0.6213060447147915,
+ "device": "cuda",
+ "size": {
+  "bytes": 4047,
+  "wbits": 32,
+  "n_weights": 1716,
+  "nonzero": 858,
+  "sparsity": 0.5,
+  "sparse_storage": true
+ }
+}

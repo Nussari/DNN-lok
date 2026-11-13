@@ -1,0 +1,1 @@
+{"monitor": "val_bal_acc", "patience": 20, "epochs": 60}

@@ -1,0 +1,21 @@
+{
+ "rule": "argmax; if tumour sensitivity on clean val < 0.98, the highest cutoff on P(tumour) reaching 0.98",
+ "decisions": {
+  "large": null,
+  "9.3 kB": null,
+  "18.8 kB": null,
+  "1.4 kB": 0.2832181453704834
+ },
+ "files": {
+  "large": "final_s1738_val.npz",
+  "9.3 kB": "dwsep_k3_w16_qat4_s1738_val.npz",
+  "18.8 kB": "dwsep_k5_w32_labe_prune75_qat4_s1738_val.npz",
+  "1.4 kB": "dwsep_k5_w4_dist_prune50_qat4_s1738_val.npz"
+ },
+ "threshold": null,
+ "val_auc": 0.998145946557971,
+ "superseded": {
+  "rule": "highest cutoff with tumour sensitivity >= 0.98 (c2 wording)",
+  "threshold": 0.717461109161377
+ }
+}

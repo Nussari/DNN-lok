@@ -1,0 +1,12 @@
+# dataset: download with  python tools/get_data.py
+data/
+# preprocessed tensors, rebuilt automatically from data/
+cache/
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+# run logs and plot images extracted while building notebooks
+tools/_out/
+# runs replaced when a configuration is retrained (lib/train.py keeps them instead of overwriting)
+results/_superseded/

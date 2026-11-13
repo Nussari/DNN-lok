@@ -1,0 +1,129 @@
+{
+ "config": {
+  "exp": "d5",
+  "name": "dwsep_k5_w4_dist_prune0_ptqint8_s1740",
+  "mode": "gray",
+  "resize": "crop",
+  "size": 128,
+  "probe": false,
+  "normalize": "per_image",
+  "train_frac": 1.0,
+  "train_n": 0,
+  "widths": [
+   4,
+   8,
+   16,
+   32
+  ],
+  "depths": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "kernel": 5,
+  "stem_kernel": 5,
+  "block": "dwsep",
+  "norm": true,
+  "residual": false,
+  "downsample": "avgpool",
+  "dropout": 0.0,
+  "optimizer": "adam",
+  "lr": 0.003,
+  "weight_decay": 0.0,
+  "batch_size": 64,
+  "schedule": "none",
+  "loss": "label_smoothing",
+  "sampler": "none",
+  "epochs": 30,
+  "patience": 10,
+  "monitor": "val_bal_acc",
+  "aug": "mild",
+  "seed": 1740,
+  "extra": {
+   "init": {
+    "exp": "d3",
+    "name": "dwsep_k5_w4_kdT4a0.5_s1740"
+   },
+   "kd": {
+    "T": 4,
+    "alpha": 0.5
+   },
+   "prune": {
+    "sparsity": 0.0,
+    "ramp": 10
+   },
+   "ptq": "int8",
+   "src": {
+    "exp": "d4",
+    "name": "dwsep_k5_w4_dist_prune0_s1740"
+   }
+  }
+ },
+ "history": [],
+ "best_epoch": 0,
+ "epochs_run": 0,
+ "val": {
+  "bal_acc": 0.8801638176638177,
+  "macro_f1": 0.8780143733788235,
+  "accuracy": 0.8870192307692307,
+  "recall": {
+   "glioma": 0.8878,
+   "meningioma": 0.838,
+   "no_tumor": 0.8333,
+   "pituitary": 0.9615
+  },
+  "precision": {
+   "glioma": 0.9112,
+   "meningioma": 0.9141,
+   "no_tumor": 0.8333,
+   "pituitary": 0.8547
+  },
+  "tumor_auc": 0.9811339447463767,
+  "tumor_sens": 0.9782608695652174,
+  "tumor_spec": 0.8333333333333334,
+  "confusion": [
+   [
+    277,
+    12,
+    10,
+    13
+   ],
+   [
+    16,
+    181,
+    5,
+    14
+   ],
+   [
+    7,
+    2,
+    80,
+    7
+   ],
+   [
+    4,
+    3,
+    1,
+    200
+   ]
+  ]
+ },
+ "n_params": 1912,
+ "n_conv": 0,
+ "sec_per_epoch": 0,
+ "device": "cpu",
+ "size": {
+  "bytes": 2516,
+  "wbits": 8,
+  "n_weights": 1716,
+  "nonzero": 1716,
+  "sparsity": 0.0,
+  "sparse_storage": false,
+  "serialized_bytes": 23126
+ },
+ "latency": {
+  "fp32_ms": 1.1205999908270314,
+  "int8_ms": 5.392699997173622
+ }
+}

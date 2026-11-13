@@ -1,0 +1,125 @@
+{
+ "config": {
+  "exp": "d5",
+  "name": "single_k5_w16_dist_prune50_ptq4_s1739",
+  "mode": "gray",
+  "resize": "crop",
+  "size": 128,
+  "probe": false,
+  "normalize": "per_image",
+  "train_frac": 1.0,
+  "train_n": 0,
+  "widths": [
+   16,
+   32,
+   64,
+   128
+  ],
+  "depths": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "kernel": 5,
+  "stem_kernel": 5,
+  "block": "single",
+  "norm": true,
+  "residual": false,
+  "downsample": "avgpool",
+  "dropout": 0.0,
+  "optimizer": "adam",
+  "lr": 0.003,
+  "weight_decay": 0.0,
+  "batch_size": 64,
+  "schedule": "none",
+  "loss": "label_smoothing",
+  "sampler": "none",
+  "epochs": 30,
+  "patience": 10,
+  "monitor": "val_bal_acc",
+  "aug": "mild",
+  "seed": 1739,
+  "extra": {
+   "init": {
+    "exp": "d3",
+    "name": "single_k5_w16_kdT4a0.5_s1739"
+   },
+   "kd": {
+    "T": 4,
+    "alpha": 0.5
+   },
+   "prune": {
+    "sparsity": 0.5,
+    "ramp": 10
+   },
+   "ptq": 4,
+   "src": {
+    "exp": "d4",
+    "name": "single_k5_w16_dist_prune50_s1739"
+   }
+  }
+ },
+ "history": [],
+ "best_epoch": 0,
+ "epochs_run": 0,
+ "val": {
+  "bal_acc": 0.9640758547008548,
+  "macro_f1": 0.9641346076095683,
+  "accuracy": 0.9651442307692307,
+  "recall": {
+   "glioma": 0.9679,
+   "meningioma": 0.9444,
+   "no_tumor": 0.9583,
+   "pituitary": 0.9856
+  },
+  "precision": {
+   "glioma": 0.9557,
+   "meningioma": 0.9577,
+   "no_tumor": 0.9485,
+   "pituitary": 0.9951
+  },
+  "tumor_auc": 0.9981600996376812,
+  "tumor_sens": 0.9932065217391305,
+  "tumor_spec": 0.9583333333333334,
+  "confusion": [
+   [
+    302,
+    7,
+    2,
+    1
+   ],
+   [
+    9,
+    204,
+    3,
+    0
+   ],
+   [
+    3,
+    1,
+    92,
+    0
+   ],
+   [
+    2,
+    1,
+    0,
+    205
+   ]
+  ]
+ },
+ "n_params": 276628,
+ "n_conv": 0,
+ "sec_per_epoch": 0,
+ "device": "cuda",
+ "size": {
+  "bytes": 105482,
+  "wbits": 4,
+  "n_weights": 276112,
+  "nonzero": 137776,
+  "sparsity": 0.5010140812423944,
+  "sparse_storage": true
+ },
+ "latency": {}
+}

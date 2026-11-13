@@ -1,0 +1,113 @@
+{
+ "config": {
+  "exp": "d5",
+  "name": "dwsep_k5_w2_ptq8_s1740",
+  "mode": "gray",
+  "resize": "crop",
+  "size": 128,
+  "probe": false,
+  "normalize": "per_image",
+  "train_frac": 1.0,
+  "train_n": 0,
+  "widths": [
+   2,
+   4,
+   8,
+   16
+  ],
+  "depths": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "kernel": 5,
+  "stem_kernel": 5,
+  "block": "dwsep",
+  "norm": true,
+  "residual": false,
+  "downsample": "avgpool",
+  "dropout": 0.0,
+  "optimizer": "adam",
+  "lr": 0.03,
+  "weight_decay": 0.0,
+  "batch_size": 64,
+  "schedule": "none",
+  "loss": "label_smoothing",
+  "sampler": "none",
+  "epochs": 60,
+  "patience": 20,
+  "monitor": "val_bal_acc",
+  "aug": "mild",
+  "seed": 1740,
+  "extra": {
+   "ptq": 8,
+   "src": {
+    "exp": "d2",
+    "name": "dwsep_k5_w2_s1740"
+   }
+  }
+ },
+ "history": [],
+ "best_epoch": 0,
+ "epochs_run": 0,
+ "val": {
+  "bal_acc": 0.7657808048433048,
+  "macro_f1": 0.7382522986913925,
+  "accuracy": 0.7379807692307693,
+  "recall": {
+   "glioma": 0.5833,
+   "meningioma": 0.7546,
+   "no_tumor": 0.8021,
+   "pituitary": 0.9231
+  },
+  "precision": {
+   "glioma": 0.901,
+   "meningioma": 0.6221,
+   "no_tumor": 0.6696,
+   "pituitary": 0.7589
+  },
+  "tumor_auc": 0.9552055027173912,
+  "tumor_sens": 0.9483695652173914,
+  "tumor_spec": 0.8020833333333334,
+  "confusion": [
+   [
+    182,
+    80,
+    19,
+    31
+   ],
+   [
+    10,
+    163,
+    17,
+    26
+   ],
+   [
+    7,
+    8,
+    77,
+    4
+   ],
+   [
+    3,
+    11,
+    2,
+    192
+   ]
+  ]
+ },
+ "n_params": 786,
+ "n_conv": 0,
+ "sec_per_epoch": 0,
+ "device": "cuda",
+ "size": {
+  "bytes": 1102,
+  "wbits": 8,
+  "n_weights": 686,
+  "nonzero": 677,
+  "sparsity": 0.013119533527696792,
+  "sparse_storage": false
+ },
+ "latency": {}
+}

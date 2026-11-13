@@ -1,0 +1,129 @@
+{
+ "config": {
+  "exp": "d5",
+  "name": "dwsep_k5_w4_dist_prune50_ptqint8_s1738",
+  "mode": "gray",
+  "resize": "crop",
+  "size": 128,
+  "probe": false,
+  "normalize": "per_image",
+  "train_frac": 1.0,
+  "train_n": 0,
+  "widths": [
+   4,
+   8,
+   16,
+   32
+  ],
+  "depths": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "kernel": 5,
+  "stem_kernel": 5,
+  "block": "dwsep",
+  "norm": true,
+  "residual": false,
+  "downsample": "avgpool",
+  "dropout": 0.0,
+  "optimizer": "adam",
+  "lr": 0.003,
+  "weight_decay": 0.0,
+  "batch_size": 64,
+  "schedule": "none",
+  "loss": "label_smoothing",
+  "sampler": "none",
+  "epochs": 30,
+  "patience": 10,
+  "monitor": "val_bal_acc",
+  "aug": "mild",
+  "seed": 1738,
+  "extra": {
+   "init": {
+    "exp": "d3",
+    "name": "dwsep_k5_w4_kdT4a0.5_s1738"
+   },
+   "kd": {
+    "T": 4,
+    "alpha": 0.5
+   },
+   "prune": {
+    "sparsity": 0.5,
+    "ramp": 10
+   },
+   "ptq": "int8",
+   "src": {
+    "exp": "d4",
+    "name": "dwsep_k5_w4_dist_prune50_s1738"
+   }
+  }
+ },
+ "history": [],
+ "best_epoch": 0,
+ "epochs_run": 0,
+ "val": {
+  "bal_acc": 0.8509170227920227,
+  "macro_f1": 0.841013121985196,
+  "accuracy": 0.8497596153846154,
+  "recall": {
+   "glioma": 0.8558,
+   "meningioma": 0.713,
+   "no_tumor": 0.8542,
+   "pituitary": 0.9808
+  },
+  "precision": {
+   "glioma": 0.8841,
+   "meningioma": 0.8603,
+   "no_tumor": 0.781,
+   "pituitary": 0.8293
+  },
+  "tumor_auc": 0.9690755208333333,
+  "tumor_sens": 0.96875,
+  "tumor_spec": 0.8541666666666666,
+  "confusion": [
+   [
+    267,
+    20,
+    10,
+    15
+   ],
+   [
+    27,
+    154,
+    12,
+    23
+   ],
+   [
+    7,
+    3,
+    82,
+    4
+   ],
+   [
+    1,
+    2,
+    1,
+    204
+   ]
+  ]
+ },
+ "n_params": 1912,
+ "n_conv": 0,
+ "sec_per_epoch": 0,
+ "device": "cpu",
+ "size": {
+  "bytes": 1873,
+  "wbits": 8,
+  "n_weights": 1716,
+  "nonzero": 858,
+  "sparsity": 0.5,
+  "sparse_storage": true,
+  "serialized_bytes": 23126
+ },
+ "latency": {
+  "fp32_ms": 1.074150000931695,
+  "int8_ms": 5.386300006648526
+ }
+}
