@@ -1,8 +1,12 @@
 # Brain-tumour MRI classification with a CNN trained from scratch
 
-Final project for a deep neural networks course. A convolutional network is trained **from scratch** (no
-pretrained weights) to classify brain MRI slices into four classes: **glioma, meningioma, pituitary tumour and no
-tumour**. The model is then compressed with distillation, pruning and quantization into models of a few kilobytes.
+Final project for a deep neural networks course, by Viktor Andri Hermannsson. A convolutional network is trained
+**from scratch** (no pretrained weights) to classify brain MRI slices into four classes: **glioma, meningioma,
+pituitary tumour and no tumour**. The model is then compressed with distillation, pruning and quantization into
+models of a few kilobytes.
+
+**The report: [report/report.pdf](report/report.pdf)** (two pages). This README explains how to explore the
+experiments behind it and how to reproduce them.
 
 * **Dataset:** BDNeuro-MRI v7 (Mendeley Data, DOI 10.17632/zwr4ntf94j.7), official split: 4,160 train /
   892 val / 889 test images. Licence: **CC BY 4.0**, as stated on the Mendeley Data page (the README inside the
@@ -44,6 +48,8 @@ models 0.5 to 1.1 pp. Per-class results and the weight files of each model are i
 ```
 README.md          this file
 MODELS.md          the four final models: test and val results, sizes, decision rule, weight files
+report/            the report (report.pdf, report.tex) and make_figures.py, which draws its figures from
+                   artifacts/ and results/
 requirements.txt
 early/             the first notebooks: project plan (initial), first look at the data (s1), choice of metric (s2)
 notebooks/         the pipeline, one notebook per step
@@ -65,6 +71,8 @@ data/, cache/      not tracked: the dataset (tools/get_data.py) and preprocessed
 
 ## How to explore
 
+0. **The report** (`report/report.pdf`) summarises the whole project in two pages; everything below is the
+   detail behind it.
 1. **The plan and first look:** `early/initial.ipynb`, `early/s1_data-explore.ipynb`, `early/s2_eval_setup.ipynb`.
    These came first; c1 and c2 redo the same questions in full.
 2. **The pipeline, in order.** Each notebook lists its options, tests them, and ends with a written decision and
@@ -148,3 +156,9 @@ The numbers will be close to, not identical with, the ones reported: GPU trainin
 reproducible (retraining the same configuration moved its mean by about 0.5 pp, see c9), and several steps choose
 between options that lie within seed noise of each other, so a rerun can take a slightly different path
 (`history/README.md`, round r3).
+
+### 5. Rebuild the report
+```
+python report/make_figures.py                             # needs the dataset for the example images
+cd report && tectonic report.tex                          # or pdflatex / Overleaf
+```

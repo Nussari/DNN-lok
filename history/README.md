@@ -125,6 +125,7 @@ BDNeuro-MRI v7 (Mendeley Data, DOI 10.17632/zwr4ntf94j.7). Results reported on t
 |---|---|---|---|
 | dataset authors | CNN | no | 0.847 |
 | dataset authors | ViT | no | 0.826 |
+| dataset authors | hybrid CNN-ViT | no | 0.819 |
 | dataset authors | ResNet50 / DenseNet121 | frozen ImageNet | 0.803 / 0.871 |
 | dataset authors | ResNet50 / DenseNet121 | fine-tuned ImageNet | 0.971 / 0.983 |
 | **this project** | large model (from scratch) | no | **0.962** |

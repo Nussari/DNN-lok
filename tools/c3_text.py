@@ -19,7 +19,6 @@ T["aug"] = """
 **Check by eye.**
 * *geometric* and *mild* produce plausible scans (small tilt, shift, zoom, left/right mirror).
 * *strong* sometimes pushes part of the head out of frame and visibly adds noise, so it is the upper bound to test.
-* Vertical flips are deliberately not included (upside-down anatomy never occurs).
 
 **Speed.** One pass over train takes 0.1 s without augmentation and 2 s with *strong*, so augmentation costs
 about 2 s per epoch.

@@ -18,7 +18,7 @@ T["look"] = """
 
 **Decisions.**
 * Horizontal flip is anatomically plausible for all three views (left/right symmetry; sagittal images face both
-  ways in the data). Vertical flips are not. → augmentation candidates for **c8**.
+  ways in the data) → augmentation candidates for **c8**.
 * The modality mix in no_tumor is a label-correlated difference that preprocessing cannot remove (it is the
   image content). It is a **shortcut risk** that is measured with a probe in **c5** and reported as a limitation.
 """
